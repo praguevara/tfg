@@ -1,0 +1,10 @@
+*.log
+*.acn
+*.aux
+*.out
+*.ist
+*.lof
+*.lol
+*.lot
+*.toc
+*.xdv
