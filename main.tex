@@ -1,167 +1,151 @@
-\documentclass{thesis}
-\usepackage{fancyhdr}
-\usepackage{hyperref}
-\usepackage{amsmath}
-\usepackage{rotating}
-\usepackage{inputenc}
-\usepackage{babel}
-\usepackage{enumitem}
-\usepackage{chngcntr}
-\usepackage{verbatim}
-\usepackage{url}
-\usepackage[a4paper, total={6in, 8in}]{geometry}
-\usepackage{setspace}
-\usepackage{graphicx}
-\usepackage{afterpage}
-\usepackage{longtable}
-\usepackage{xcolor}
-\definecolor{cover}{RGB}{239,206,53}
-\definecolor{base}{RGB}{35,31,32}
-\usepackage{pdfpages}
+% !TeX program = xelatex
+% !TeX TXS-program:compile = txs:///xelatex/[--shell-escape]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Plantilla TFG/TFM
+% Escuela Politécnica Superior de la Universidad de Alicante
+% Realizado por: Jose Manuel Requena Plens
+% Contacto: info@jmrplens.com / Telegram:@jmrplens
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% Elige si deseas optimizar la ejecución del proyecto almacenando las figuras generadas con TikZ y PGF en una carpeta (archivos/figuras-procesadas).
+% 1 - Si, 2 - No
+\def\OptimizaTikZ{1}
 
-% \usepackage{listings}
-% \lstset{ frame=Ltb,
-% framerule=0pt,
-% aboveskip=0.5cm,
-% framextopmargin=3pt,
-% framexbottommargin=3pt,
-% framexleftmargin=0.4cm,
-% framesep=0pt,
-% rulesep=.4pt,
-% backgroundcolor=\color{gray97},
-% rulesepcolor=\color{black},
-% %
-% stringstyle=\ttfamily,
-% showstringspaces = false,
-% basicstyle=\small\ttfamily,
-% commentstyle=\color{gray45},
-% keywordstyle=\bfseries,
-% %
-% numbers=left,
-% numbersep=15pt,
-% numberstyle=\tiny,
-% numberfirstline = false,
-% breaklines=true,
-% literate={á}{{\'a}}1 {Á}{{\'A}}1 {é}{{\'e}}1 {É}{{\'e}}1 {í}{{\'i}}1  {Í}{{\'I}}1  {ó}{{\'o}}1  {Ó}{{\'O}}1  {ú}{{\'u}}1  {Ú}{{\'U}}1  {Ñ}{{\~N}}1 {ñ}{{\~n}}1 ,
-% }
+% Archivo .TEX que incluye todas las configuraciones del documento y los paquetes. Añade todo aquello que necesites utilizar en el documento en este archivo.
+% En él se encuentra la configuración de los márgenes, establecidos según las directrices de estilo de la EPS.
+\input{include/configuracioninicial}
 
-% \usepackage{eurosym}
-% % minimizar fragmentado de listados
-% \lstnewenvironment{listing}[1][]
-%    {\lstset{#1}\pagebreak[0]}{\pagebreak[0]}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% INFORMACIÓN DEL TFG
+% Comentar lo que NO se desee añadir y sustituir con la información correcta.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Título y subtítulo
+\newcommand{\titulo}{Visualising predicted body model after weight-loss treatment}
+\newcommand{\subtitulo}{Subtítulo del proyecto}
+% Datos del autor
+\newcommand{\miNombre}{Pablo Ramón Guevara}
+% Determinar género para etiquetas Autore/Autora/Autor (nb o en blanco,f,m)
+\newcommand{\miGenero}{m}
+\newcommand{\miEmail}{prg54@alu.ua.es}
+% Datos del tutor/es
+% Si no hay tutorB, comentar tutorB y dptoB para que la etiqueta sea Tutor:
+\newcommand{\miTutor}{Jorge Azorín López}
+\newcommand{\miTutorB}{Andrés Fuster Guilló}
+\newcommand{\departamentoTutor}{Departamento del tutor}
+\newcommand{\departamentoTutorB}{Departamento del cotutor}
+% Datos de la facultad y universidad
+\newcommand{\miFacultad}{Escuela Politécnica Superior}
+\newcommand{\miFacultadCorto}{EPS UA}
+\newcommand{\miUniversidad}{\protect{Universidad de Alicante}}
+\newcommand{\miUbicacion}{Alicante}
 
-% \lstdefinestyle{Consola}
-%    {basicstyle=\scriptsize\bf\ttfamily,
-%     backgroundcolor=\color{gray30},
-%     frame=single,
-%     numbers=none
-%    }
-% \lstdefinestyle{C}
-% 	{basicstyle=\scriptsize,
-% 	frame=single,
-% 	language=C,
-% 	numbers=left
-% 	}
-% \lstdefinestyle{CodigoC++}
-%         {basicstyle=\small,
-% 	frame=single,
-% 	backgroundcolor=\color{gray30},
-% 	language=C++,
-% 	numbers=left
-%  	}
-% \lstset{language=Matlab, breaklines=true, basicstyle=\footnotesize}
- 	
-%Info
-\input{variables}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% INDICA TU TITULACIÓN
+% ID	GRADO -------------------------------------------------
+% 1		Ingeniería en Imagen y Sonido en Telecomunicación
+% 2		Ingeniería Civil
+% 3		Ingeniería Química
+% 4		Ingeniería Informática
+% 5		Ingeniería Multimedia
+% 6		Arquitectura Técnica
+% 7		Arquitectura
+% 8		Robótica
+% %		%%%%%%%%%%%%
+% ID	MÁSTER ------------------------------------------------
+% A		Telecomunicación
+% B		Caminos, Canales y Puertos
+% C		Gestión en la Edificación
+% D		Desarrollo Web
+% E		Materiales, Agua, Terreno
+% F		Informática
+% G 	Automática y Robótica
+% H		Prevención de riesgos laborales
+% I		Gestión Sostenible Agua
+% J		Desarrollo Aplicaciones Móviles
+% K		Ingeniería Química
+% L		Ciberseguridad
+% M		Ingeniería Geológica
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!%%%
+																		%
+\def\IDtitulo{4} % INTRODUCE LA ID DE TU TITULACIÓN						%
+																		%
+%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \pagestyle{fancy}
-% \fancyhf{}
-% \fancyhead[LO]{\leftmark}
-% \fancyhead[RE]{\rightmark}
-% \fancyhead[RO,LE]{\textbf{\thepage}}
-% \renewcommand{\chaptermark}[1]{\markboth{\textbf{#1}}{}}
-% \renewcommand{\sectionmark}[1]{\markright{\textbf{\thesection. #1}}}
+% Configuración automática según el identificador elegido
+\input{include/configuraciontitulacion} 
 
-% \setlength{\headheight}{1.5\headheight}
+% Información añadida a las propiedades del archivo PDF.
+\hypersetup{
+pdfauthor = {\miNombre~(\miEmail)},
+pdftitle = {\titulo},
+}
 
-% \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
-%Definimos los tipos teorema, ejemplo y definición podremos usar estos tipos
-%simplemente poniendo \begin{teorema} \end{teorema} ...
-% \newtheorem{teorema}{Teorema}[chapter]
-% \newtheorem{ejemplo}{Ejemplo}[chapter]
-% \newtheorem{definicion}{Definición}[chapter]
- 
-% \newcommand{\bigrule}{\titlerule[0.5mm]}
+%%
+% Archivo de acrónimos
+%%
+\makeglossaries % Genera la base de datos de acrónimos
+\input{anexos/acronimos.tex} % Archivo que contiene los acrónimos
 
-%Para conseguir que en las páginas en blanco no ponga cabeceras
-% \makeatletter
-% \def\clearpage{%
-%   \ifvmode
-%     \ifnum \@dbltopnum =\m@ne
-%       \ifdim \pagetotal <\topskip
-%         \hbox{}
-%       \fi
-%     \fi
-%   \fi
-%   \newpage
-%   \thispagestyle{empty}
-%   \write\m@ne{}
-%   \vbox{}
-%   \penalty -\@Mi
-% }
-% \makeatother
-
-%QUITAR RECUADRO DE LAS REFERENCIAS
-% \usepackage{hyperref}
-% \hypersetup{
-%     colorlinks,%
-%     citecolor=black,%
-%     filecolor=black,%
-%     linkcolor=black,%
-%     urlcolor=black
-% }
-%AQUI COMIENZA LA LISTA DE FICHEROS A INCLUIR
-
+%%%%%%%%%%%%%%%%%%%%%%%% 
+% INICIO DEL DOCUMENTO
+% A partir de aquí debes empezar a realizar tu TFG/TFM
+%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
-% \renewcommand{\listtablename}{Índice de tablas} %para sustituir la palabra cuadro por tabla
-% \renewcommand{\tablename}{Tabla}
-% \renewcommand{\lstlistingname}{Listado}
-% \renewcommand{\lstlistlistingname}{Índice de \lstlistingname s}
 
+% Números romanos hasta el mainmatter.
 \frontmatter
-\input{cover/cover} %la portada en color
-\input{cover/cover_2} %la portada en b/n
-% \input{preliminares/preliminares} %editar este texto (capitulos/preliminares.tex) para cambiar preámbulo, agradecimientos y dedicatorias
-\tableofcontents
-\listoffigures
-\listoftables
-%\lstlistoflistings
 
-\mainmatter %entre frontmatter y mainmatter, la numeración es en romanos.
+% PORTADA
+\input{include/portada/portada_color} % Portada Color
+\input{include/portada/portada_bn} % Portada B/N
 
-% \input{capitulos/introduccion/Introduccion}
-% \input{capitulos/antecedentes/antecedentes}
-% \input{capitulos/metodo/metodo}
-% \input{capitulos/experimentacion/Experimentacion}
-% \input{capitulos/conclusiones/Conclusiones}
-% \input{capitulos/anexos/anexos}
+%%%%% PREAMBULO
+% Incluye el .tex que contiene el preámbulo, agradecimientos y dedicatorias.
+\input{capitulos/preliminaresconagradecimientos}
 
-\input{chapters/introduction/main}
-\input{chapters/model/main}
-\input{chapters/experiments/main}
-\input{chapters/conclusion/main}
+% Incluye después del archivo anterior el indice y lista de figuras, tablas y códigos.
+\tableofcontents	% Índice
+\listoffigures		% Índice de figuras
+\listoftables		% Índice de tablas
+\lstlistoflistings	% Índice de códigos
 
+% Inicia la numeración habitual.
+\mainmatter
+
+%%%%
+% CONTENIDO. CAPÍTULOS DEL TRABAJO - Añade o elimina según tus necesidades
+%%%%
+\input{capitulos/Introduccion}	% Plantilla: Se muestran contenidos
+\input{capitulos/marcoteorico}	% Plantilla: Se muestran listas
+\input{capitulos/objetivos}		% Plantilla: Se muestran tablas
+\input{capitulos/metodologia}	% Plantilla: Se muestran figuras
+\input{capitulos/desarrollo}		% Plantilla: Se muestran listados
+\input{capitulos/resultados}		% Plantilla: Se muestran gráficas
+\input{capitulos/conclusiones}	% Plantilla: Se muestran matemáticas
+
+%%%%
+% CONTENIDO. BIBLIOGRAFÍA.
+%%%%
 \nocite{*} %incluye TODOS los documentos de la base de datos bibliográfica sean o no citados en el texto
-\bibliography{bibliography/bibliography}
-% \addcontentsline{toc}{chapter}{Bibliografía} %sustituir bibliografía con el nombre del fichero bibtex con la bibliografía
-%\bibliographystyle{unsrt}
-\bibliographystyle{apalike}
-%
-%\appendix
-%\input{anexos/anexo_I}
-%\input{glosario/entradas_glosario}
-% \addcontentsline{toc}{chapter}{Glosario} %si se usa glosario hay que añadirlo al índice
-% \printglossary %muestra el glosario
+\bibliography{bibliografia/bibliografia} % Archivo que contiene la bibliografía
+\bibliographystyle{apacite}
+
+%%%%
+% CONTENIDO. LISTA DE ACRÓNIMOS. Comenta las líneas si no lo deseas incluir.
+%%%%
+% Incluye el listado de acrónimos utilizados en el trabajo. 
+\printglossary[style=modsuper,type=\acronymtype,title={Lista de Acrónimos y Abreviaturas}]
+% Añade el resto de acrónimos si así se desea. Si no elimina el comando siguiente
+\glsaddallunused
+
+%%%%
+% CONTENIDO. Anexos - Añade o elimina según tus necesidades
+%%%%
+\appendix % Inicio de los apéndices
+\input{anexos/anexo_I}
+\input{anexos/anexo_2}
+\input{anexos/anexo_3}
 
 \end{document}

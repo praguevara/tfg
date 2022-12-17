@@ -8,3 +8,6 @@
 *.lot
 *.toc
 *.xdv
+*.auxlock
+*.fdb_latexmk
+*.fls
