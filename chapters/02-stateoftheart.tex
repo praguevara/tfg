@@ -1,0 +1,53 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Plantilla TFG/TFM
+% Escuela Politécnica Superior de la Universidad de Alicante
+% Realizado por: Jose Manuel Requena Plens
+% Contacto: info@jmrplens.com / Telegram:@jmrplens
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{State of the Art}\label{stateoftheart}
+
+The first step in predicting how a human body will evolve over time involves
+representing it in a format comprehensible to a computer. Numerous methods
+exist for this, each offering distinct advantages and drawbacks. This chapter
+will delve into several of the most prevalent ways to represent a human body in
+3D space. Our research on this subject culminated in the submission of a paper
+to the IWANN 2023 conference.
+
+\section{3D human body representation}
+
+A straightforward approach to categorize human body representations is to
+classify based on the required input type and the generated output.
+
+\subsection{Input}
+
+Regarding input, representations fall into two main categories. categories:
+
+\begin{itemize}
+    \item 2D input: These representations utilize 2D images or videos as input. Some models may also process images from varying angles. The flexibility of these models is beneficial as they do not necessitate specific hardware to capture the input data.
+    \item 3D input: Typically, these models require 3D point clouds as input data.
+    \item Parametric models: These models demand a set of parameters describing the body.
+          Some models categorize these parameters into body shape and body pose. This
+          form of representation is highly intriguing for machine learning applications
+          due to the significant reduction in input data dimensionality. This factor
+          permits the training of a neural network with fewer samples. However, it
+          necessitates a model capable of generating parameters from the input data.
+\end{itemize}
+
+\subsection{Output}
+
+\subsubsection{Human specific}
+
+Certain models generate 3D meshes of the human body compatible with blend
+skinning, enabling animation with a skeleton. This feature proves invaluable
+for applications like video games or cinematic productions.
+
+\subsubsection{General}
+
+These models can generate 3D representations of any object, not just humans.
+
+\begin{itemize}
+    \item 3D meshes: These models create a 3D mesh of the object.
+    \item 3D voxel: These models produce a 3D voxel grid of the object. However, this approach is not widespread as it is generally not beneficial for most applications.
+    \item \gls{nerf}: This novel 3D representation directly renders the object from a specific viewpoint. While this allows for the generation of highly realistic images, it proves less beneficial for applications requiring a true 3D representation of the object.
+\end{itemize}

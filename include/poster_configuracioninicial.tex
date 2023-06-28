@@ -14,13 +14,15 @@
 % 'tikzposter' es la clase de documento
 % Esta configurado para papel DINA0. Ver el manual de tikzposter para más información
 \documentclass[
-		25pt,a0paper,portrait,
-		margin				= 0mm, 	% Margen general (no modificar)
-		innermargin			= 12mm,	% Margen interno
-		blockverticalspace	= 15mm,	% Espacio vertical entre bloques
-		colspace			= 12mm,	% Espacio horizontal entre columnas
-		subcolspace			= 8mm	% Espacio horizontal entre subcolumnas
-		]{tikzposter}  
+  25pt,a0paper,portrait,
+  margin				= 0mm, 	% Margen general (no modificar)
+  innermargin			= 12mm,	% Margen interno
+  blockverticalspace	= 15mm,	% Espacio vertical entre bloques
+  colspace			= 12mm,	% Espacio horizontal entre columnas
+  subcolspace			= 8mm	% Espacio horizontal entre subcolumnas
+]{tikzposter}
+]{tikzposter}
+]{tikzposter}
 
 % Para modificar el tamaño establecido del poster (DINA0) incluir a continuación
 % las dimensiones
@@ -38,7 +40,7 @@
 %	PAQUETES Y COMANDOS
 %
 % ************************************************
-    
+
 % Elimina los 'warnings' de problemas conocidos. 
 \usepackage{silence}
 \WarningFilter{latexfont}{Font shape}
@@ -48,14 +50,14 @@
 \usepackage{mathpazo}
 \usepackage{fontspec}
 \setmainfont{Kurier}[
-	% HyphenChar=None, % No dividir palabras al saltar de línea
-	Path		= ./include/fuentes/,
-	Extension 	= .otf,
-	UprightFont = *Light-Regular,
-	BoldFont 	= *-Regular,
-	ItalicFont 	= *Light-Italic,
-	BoldItalicFont = *-Italic
-	]
+  % HyphenChar=None, % No dividir palabras al saltar de línea
+  Path		= ./include/fuentes/,
+  Extension 	= .otf,
+  UprightFont = *Light-Regular,
+  BoldFont 	= *-Regular,
+  ItalicFont 	= *Light-Italic,
+  BoldItalicFont = *-Italic
+]
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -70,7 +72,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[base]{babel}
 \usepackage{polyglossia}
-\setdefaultlanguage{spanish}
+\setdefaultlanguage{english}
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 % TABLAS
@@ -120,17 +122,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%% 
 % MATEMÁTICAS
 %%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{amsmath,latexsym,mathtools,amsthm,amsfonts,amssymb,bm,mathrsfs} 
+\usepackage{amsmath,latexsym,mathtools,amsthm,amsfonts,amssymb,bm,mathrsfs}
 \usepackage{upgreek}
 % Comando para añadir información de variables a las ecuaciones
 % Uso: \begin{condiciones}[donde:] ....... \end{condiciones}
 \newenvironment{condiciones}[1][2]
-  {%
-   #1\tabularx{\textwidth-\widthof{#1}}[t]{
-     >{$}l<{$} @{}>{${}}c<{{}$}@{} >{\raggedright\arraybackslash}X
-   }%
-  }
-  {\endtabularx\\[\belowdisplayskip]}
+{%
+#1\tabularx{\textwidth-\widthof{#1}}[t]{
+>{$}l<{$} @{}>{${}}c<{{}$}@{} >{\raggedright\arraybackslash}X
+}%
+}
+{\endtabularx\\[\belowdisplayskip]}
 
 %%%%%%%%%%%%%%%%%%%%%%%% 
 % OTROS
@@ -156,7 +158,7 @@
 % USO: \labelblock{BloqueA}  
 \newcommand\labelblock[1]{\node[fit=(blockbody)(blocktitle),inner sep=5pt] (#1) {};}
 % Abreviatura de la barra invertida
-\newcommand{\bs}{\textbackslash}   
+\newcommand{\bs}{\textbackslash}
 
 
 % ************************************************
@@ -174,16 +176,16 @@
 % Tema de la plantilla. (NO MODIFICAR)
 \usetheme{Default}
 % Color título (NO MODIFICAR)
-\colorlet{titlefgcolor}{\colortexto}	
+\colorlet{titlefgcolor}{\colortexto}
 \colorlet{titlebgcolor}{\colorgrado}
 % Define el estilo de la cabecera. (NO MODIFICAR)
 \definetitlestyle{TFGTFM}{
-    width=\paperwidth, roundedcorners=0, linewidth=0pt, innersep=1.5cm,
-    titletotopverticalspace=0mm, titletoblockverticalspace=20mm,
-    titlegraphictotitledistance=10pt
+  width=\paperwidth, roundedcorners=0, linewidth=0pt, innersep=1.5cm,
+  titletotopverticalspace=0mm, titletoblockverticalspace=20mm,
+  titlegraphictotitledistance=10pt
 }{
-   \draw[draw=none, fill=titlebgcolor]%
-   (\titleposleft,\titleposbottom) rectangle (\titleposright,\titlepostop);}
+  \draw[draw=none, fill=titlebgcolor]%
+  (\titleposleft,\titleposbottom) rectangle (\titleposright,\titlepostop);}
 % Establece el estilo de la cabecera. (NO MODIFICAR)
 \usetitlestyle{TFGTFM}
 % Genera la barra superior
@@ -199,18 +201,18 @@
 % Para mostrar la fecha actual (mes año) con \Hoy
 \newcommand{\MES}{%
   \ifcase\month% 0
-    \or Enero% 1
-    \or Febrero% 2
-    \or Marzo% 3
-    \or Abril% 4
-    \or Mayo% 5
-    \or Junio% 6
-    \or Julio% 7
-    \or Agosto% 8
-    \or Septiembre% 9
-    \or Octubre% 10
-    \or Noviembre% 11
-    \or Diciembre% 12
+  \or Enero% 1
+  \or Febrero% 2
+  \or Marzo% 3
+  \or Abril% 4
+  \or Mayo% 5
+  \or Junio% 6
+  \or Julio% 7
+  \or Agosto% 8
+  \or Septiembre% 9
+  \or Octubre% 10
+  \or Noviembre% 11
+  \or Diciembre% 12
   \fi}
 \newcommand{\ANYO}{\number\year}
 \newcommand{\Hoy}{\MES\ \ANYO}

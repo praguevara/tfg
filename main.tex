@@ -20,7 +20,7 @@
 % Comentar lo que NO se desee añadir y sustituir con la información correcta.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Título y subtítulo
-\newcommand{\titulo}{Visualising predicted body model after weight-loss treatment}
+\newcommand{\titulo}{Predicting future body shape before weight loss}
 \newcommand{\subtitulo}{Subtítulo del proyecto}
 % Datos del autor
 \newcommand{\miNombre}{Pablo Ramón Guevara}
@@ -39,8 +39,6 @@
 \newcommand{\miUniversidad}{\protect{Universidad de Alicante}}
 \newcommand{\miUbicacion}{Alicante}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% INDICA TU TITULACIÓN
 % ID	GRADO -------------------------------------------------
 % 1		Ingeniería en Imagen y Sonido en Telecomunicación
 % 2		Ingeniería Civil
@@ -65,13 +63,8 @@
 % K		Ingeniería Química
 % L		Ciberseguridad
 % M		Ingeniería Geológica
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!%%%
-																		%
-\def\IDtitulo{4} % INTRODUCE LA ID DE TU TITULACIÓN						%
-																		%
-%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+					
+\def\IDtitulo{4} % INTRODUCE LA ID DE TU TITULACIÓN
 
 % Configuración automática según el identificador elegido
 \input{include/configuraciontitulacion} 
@@ -103,7 +96,7 @@ pdftitle = {\titulo},
 
 %%%%% PREAMBULO
 % Incluye el .tex que contiene el preámbulo, agradecimientos y dedicatorias.
-\input{capitulos/preliminaresconagradecimientos}
+\input{chapters/00-preamblewiththanks}
 
 % Incluye después del archivo anterior el indice y lista de figuras, tablas y códigos.
 \tableofcontents	% Índice
@@ -117,26 +110,26 @@ pdftitle = {\titulo},
 %%%%
 % CONTENIDO. CAPÍTULOS DEL TRABAJO - Añade o elimina según tus necesidades
 %%%%
-\input{capitulos/Introduccion}	% Plantilla: Se muestran contenidos
-\input{capitulos/marcoteorico}	% Plantilla: Se muestran listas
-\input{capitulos/objetivos}		% Plantilla: Se muestran tablas
-\input{capitulos/metodologia}	% Plantilla: Se muestran figuras
-\input{capitulos/desarrollo}		% Plantilla: Se muestran listados
-\input{capitulos/resultados}		% Plantilla: Se muestran gráficas
-\input{capitulos/conclusiones}	% Plantilla: Se muestran matemáticas
+\input{chapters/01-introduction}
+\input{chapters/02-stateoftheart}
+\input{chapters/03-objectives}
+\input{chapters/04-methodology}	
+\input{chapters/05-development}
+\input{chapters/06-results}
+\input{chapters/07-conclusion}
 
 %%%%
 % CONTENIDO. BIBLIOGRAFÍA.
 %%%%
 \nocite{*} %incluye TODOS los documentos de la base de datos bibliográfica sean o no citados en el texto
-\bibliography{bibliografia/bibliografia} % Archivo que contiene la bibliografía
+\bibliography{bibliography/bibliography} % Archivo que contiene la bibliografía
 \bibliographystyle{apacite}
 
 %%%%
 % CONTENIDO. LISTA DE ACRÓNIMOS. Comenta las líneas si no lo deseas incluir.
 %%%%
 % Incluye el listado de acrónimos utilizados en el trabajo. 
-\printglossary[style=modsuper,type=\acronymtype,title={Lista de Acrónimos y Abreviaturas}]
+\printglossary[style=modsuper,type=\acronymtype,title={List of Acronyms}]
 % Añade el resto de acrónimos si así se desea. Si no elimina el comando siguiente
 \glsaddallunused
 

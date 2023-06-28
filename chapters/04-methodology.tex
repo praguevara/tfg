@@ -1,0 +1,77 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Plantilla TFG/TFM
+% Escuela Politécnica Superior de la Universidad de Alicante
+% Realizado por: Jose Manuel Requena Plens
+% Contacto: info@jmrplens.com / Telegram:@jmrplens
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Methodology}\label{methodology}
+
+\section{Data}
+
+Our data comprises approximately 400 sessions collected from 80 patients. These
+sessions were recorded at various time points and are not uniformly spaced.
+Each session's data includes a 3D scan of the patient, along with several
+measurements such as weight, height, body fat percentage, etc.
+
+However, the data requires cleaning before usage. Some sessions lack certain
+measurements, and there are numerous outliers within the data. After cleaning,
+we utilized about 200 sessions.
+
+\section{Body representation}
+
+In order to represent the body shape we opted to use \gls{smpl}. \gls{smpl}
+encodes the body shape and pose using a low-dimensional linear space. The body
+shape is encoded using 10 shape parameters ($/beta$), and the pose is encoded
+using 72 pose parameters ($/theta$). As our interest lies in body shape, we
+employed only the shape parameters.
+
+\section{Neural network architecture}
+
+Given the nature of the data, we decided to use a neural network to predict the
+changes in the body shape. Since the data is temporal, we need to use a neural
+network architecture that can handle temporal data.
+
+There are different neural network architectures that work well with temporal
+data. Recurrent neural networks are a type of neural networks that feed the
+output of the previous step as input to the next step. This allows them to
+remember information from previous steps, which is useful for time series.
+However, they can `forget' information from the beginning of the sequence,
+which is a problem known as vanishing gradients. There are some variations of
+recurrent neural networks that try to solve this problem, such as \gls{lstm}
+and \gls{gru}.
+
+Transformer networks are a relatively new type of neural network that has been
+used with great success in natural language processing. They are based on
+attention mechanisms, which allow them to focus on specific parts of the input
+sequence. This makes them very useful for time series, since they can focus on
+the most relevant parts of the sequence. The big disadvantage of transformer
+networks for this application is that they require large amounts of training
+data, which is not available in this case.
+
+We ended up using an neural network architecture that uses an \gls{lstm}.
+
+\section{Training}
+
+\subsection{Variability in the dates of the sessions}
+
+The dataset's sessions are not uniformly spaced in time, varying from a few
+days to several months apart. To mitigate this issue, we:
+
+Calculated a variable representing the number of days until the next session.
+
+Modified the neural network to predict the daily change in variables, instead
+of predicting the variables for the following session.
+
+We implemented a residual connection to the neural network, enabling it to
+predict the change in variables from one session to the next. Then, we
+multiplied this change by the number of days until the next session and added
+it to the previous session to calculate the predicted values for the next
+session. This approach assumes a linear change between sessions—an
+approximation suited to our purpose. We augmented the data by randomly removing
+intermediate sessions and recalculating the number of days until the next
+session.
+
+\section{Evaluation}
+
+\section{Results}

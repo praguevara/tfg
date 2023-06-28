@@ -50,14 +50,7 @@
 % Género del autore
 \def \GeneroF{f}
 \def \GeneroM{m}
-\if \miGenero\GeneroF
-	\def\EtiquetaAutore{Autora}
-\else 	\if \miGenero\GeneroM
-		\def\EtiquetaAutore{Autor}
-	\else
-		\def\EtiquetaAutore{Autore}
-	\fi
-\fi
+\def\EtiquetaAutore{Author}
 
 \if\OptimizaTikZ 1
 	\tikzexternaldisable % Desactiva la exportación com figura

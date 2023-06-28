@@ -1,0 +1,41 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Plantilla TFG/TFM
+% Escuela Politécnica Superior de la Universidad de Alicante
+% Realizado por: Jose Manuel Requena Plens
+% Contacto: info@jmrplens.com / Telegram:@jmrplens
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Conclusion}\label{conclusion}
+
+This work has paved the way for an innovative approach to predicting changes in
+body shape during weight loss treatment, using machine learning models and the
+data gathered from the previous study. Our prediction model based on \gls{smpl}
+and a \gls{lstm}-based neural network successfully demonstrated its ability to
+approximate the expected changes in body shape before the conclusion of the
+weight loss treatment, which could potentially lead to improved adherence to
+treatment plans.
+
+However, our study was not without limitations. The model's performance was
+constrained by the quantity and quality of data available. Our dataset
+consisted of approximately 200 sessions from 80 patients, which, while
+substantial, might not fully capture the wide range of variability in human
+body shapes and weight loss patterns. Moreover, outliers and missing data,
+which had to be cleaned from our dataset, posed additional challenges.
+
+In future work, several improvements and expansions can be explored:
+
+\begin{itemize}
+    \item \textbf{Data collection}: Patients could submit images instead of requiring 3D scans. This approach would allow for increased data collection, while also reducing friction for the patient. We can also consider developing a method to generate 3D models from these images.
+    \item \textbf{Neural network architecture}: While we opted for a \gls{lstm}
+          architecture due to the nature of our data, other neural network architectures,
+          such as Transformers, could be explored for potential improvements in
+          prediction performance.
+    \item \textbf{Parametric models}: Other parametric models like STAR could
+          be considered as alternatives or complements to the \gls{smpl}
+          model we used. They might offer different advantages or better fit
+          the data depending on the specific conditions and requirements.
+
+    \item \textbf{Rendering output}: An exploration of smplpix for 2D
+          rendering output might provide an alternative approach for generating
+          visualization of predicted body changes.
+\end{itemize}
