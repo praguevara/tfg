@@ -1,0 +1,7 @@
+seguir dandole smplpix
+nahuel me pasa dataset
+
+predecir valores entre sesiones con ese dataset
+opcion transformer generador
+
+https://rua.ua.es/dspace/bitstream/10045/124160/6/Garcia-dUrso_etal_2022_IEEEAccess.pdf

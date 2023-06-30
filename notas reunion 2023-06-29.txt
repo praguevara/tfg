@@ -1,0 +1,31 @@
+notas reunion 2023-06-29
+
+titulo: prediccion, evolution, body shape, diet treatment, patients
+
+idiomas? revisar si es necesario traducir la intro o algo.
+
+introduccion:
+  motivacion (personal) y contexto (ej nahuel) tech4diet tech4diet predict
+  (meter sota y objetivos en introducción?)
+
+metodología -> bg?
+
+sota
+  muchas referencias
+  dividir en varios apartados
+  3d human body
+  generative nn 
+  no solo review, sino tambien buscar dónde hacer una aportación
+  
+capitulo background?
+  profundizar sota basicamente para que se entienda lo que hacemos
+
+objetivos (mucho cuidado, se suele mirar mucho)
+  un parrafo del objetivo general
+  despues objetivos específicos (personales)
+
+siempre cuando se copie texto, poner entre comillas y referenciar
+
+conclusion (reescribir objetivos según los logros)
+
+buscar más ojos para revisiones

@@ -31,8 +31,8 @@
 % Si no hay tutorB, comentar tutorB y dptoB para que la etiqueta sea Tutor:
 \newcommand{\miTutor}{Jorge Azorín López}
 \newcommand{\miTutorB}{Andrés Fuster Guilló}
-\newcommand{\departamentoTutor}{Departamento del tutor}
-\newcommand{\departamentoTutorB}{Departamento del cotutor}
+\newcommand{\departamentoTutor}{Department of Computer Science and Technology}
+\newcommand{\departamentoTutorB}{Department of Computer Science and Technology}
 % Datos de la facultad y universidad
 \newcommand{\miFacultad}{Escuela Politécnica Superior}
 \newcommand{\miFacultadCorto}{EPS UA}
@@ -63,16 +63,16 @@
 % K		Ingeniería Química
 % L		Ciberseguridad
 % M		Ingeniería Geológica
-					
+
 \def\IDtitulo{4} % INTRODUCE LA ID DE TU TITULACIÓN
 
 % Configuración automática según el identificador elegido
-\input{include/configuraciontitulacion} 
+\input{include/configuraciontitulacion}
 
 % Información añadida a las propiedades del archivo PDF.
 \hypersetup{
-pdfauthor = {\miNombre~(\miEmail)},
-pdftitle = {\titulo},
+    pdfauthor = {\miNombre~(\miEmail)},
+    pdftitle = {\titulo},
 }
 
 %%
@@ -106,14 +106,13 @@ pdftitle = {\titulo},
 
 % Inicia la numeración habitual.
 \mainmatter
-
 %%%%
 % CONTENIDO. CAPÍTULOS DEL TRABAJO - Añade o elimina según tus necesidades
 %%%%
 \input{chapters/01-introduction}
 \input{chapters/02-stateoftheart}
 \input{chapters/03-objectives}
-\input{chapters/04-methodology}	
+\input{chapters/04-methodology}
 \input{chapters/05-development}
 \input{chapters/06-results}
 \input{chapters/07-conclusion}

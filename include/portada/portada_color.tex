@@ -40,12 +40,11 @@
 		{} % Si no, no modifica el tamaño
 	} }
 
-
 % Segun el numero de tutores indica "Tutor" o "Tutores" 
 \ifx \miTutorB\undefined
-	\def\EtiquetaTutor{Tutor TODO en ingles}
+	\def\EtiquetaTutor{Supervisor}
 \else
-	\def\EtiquetaTutor{Tutores TODO en ingles}
+	\def\EtiquetaTutor{Supervisors}
 \fi
 % Género del autore
 \def \GeneroF{f}
@@ -112,7 +111,6 @@
 		{\FuentePortada \fontsize{\TamOtros}{30pt}\selectfont\color{white}\Hoy}
 	\end{textblock*}
 
-
 \end{titlepage}
 
 \if\OptimizaTikZ 1
@@ -120,9 +118,3 @@
 \fi
 
 \pagecolor{white}
-
-
-
-
-
-

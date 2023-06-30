@@ -15,7 +15,7 @@
 \usepackage{scrhack} % Previene algunos errores
 % Paquete de formato para scrbook. Con marcas, linea-separador superior e inferior
 \usepackage[automark,headsepline,footsepline]{scrlayer-scrpage}
-\clearpairofpagestyles		% Borra los estilos por defecto
+\clearpairofpagestyles	% Borra los estilos por defecto
 %%
 % Formato y contenido de la información de cabecera y pie de página
 %%
@@ -235,25 +235,24 @@
 }
 \renewcommand{\glsnamefont}[1]{\textbf{#1}}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%% 
 % COMANDOS AÑADIDOS
 %%%%%%%%%%%%%%%%%%%%%%%%
 % Para mostrar la fecha actual (mes año) con \Hoy
 \newcommand{\MES}{%
   \ifcase\month% 0
-  \or Enero% 1
-  \or Febrero% 2
-  \or Marzo% 3
-  \or Abril% 4
-  \or Mayo% 5
-  \or Junio% 6
-  \or Julio% 7
-  \or Agosto% 8
-  \or Septiembre% 9
-  \or Octubre% 10
-  \or Noviembre% 11
-  \or Diciembre% 12
+  \or January% 1
+  \or February% 2
+  \or March% 3
+  \or April% 4
+  \or May% 5
+  \or June% 6
+  \or July% 7
+  \or August% 8
+  \or September% 9
+  \or October% 10
+  \or November% 11
+  \or December% 12
   \fi}
 \newcommand{\ANYO}{\number\year}
 \newcommand{\Hoy}{\MES\ \ANYO}
@@ -285,4 +284,3 @@
 \newtheorem{teorema}{Teorema}[chapter]
 \newtheorem{ejemplo}{Ejemplo}[chapter]
 \newtheorem{definicion}{Definición}[chapter]
-
