@@ -52,11 +52,59 @@ However, the data requires cleaning before usage. Some sessions lack certain
 measurements, and there are numerous outliers within the data. After cleaning,
 we utilized about 200 sessions.
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{files/sessions_per_patient}
+    \caption{Number of sessions per patient}
+    \label{fig:sessions-per-patient}
+\end{figure}
+
 \subsection{Data cleaning}
 
 We developed a data cleaning pipeline using the \gls{pandas} library. This
 pipeline fixes some errors in the data, removes outliers and sessions with
 missing measurements.
+
+In order to do this data cleaning, we indexed the dataset with a multi-index
+containing the patient's id and the number of the session. This allowed us to
+iterate over the data in a per-patient basis, and to easily identify patients
+with problems in their data.
+
+After plotting and examining the data, we identified that one of the most
+common issues was due to the decimal separator. Many measurements were off by a
+factor of 10, so we implemented custom rules to solve this issue. We also
+implemented rules to locate and remove values that were out of range or that
+didn't match to other measurements.
+
+Some of them are:
+
+\begin{itemize}
+    \item Variation between measurements of different limbs. For example, the difference
+          in muscle or fat percentage between the left and right arm should be small.
+    \item The sum of the fat and muscle percentages should be less than 100\%.
+    \item Percentage levels of fat and muscle should be less than 100\%. If they are,
+          that probably means that the measurement is off by a factor of 10.
+\end{itemize}
+
+Even after fixing these issues there were still some outliers. We tested a
+system that detected extreme changes between sessions, but this was too prone
+to false positives. In the end, we opted to manually visualize the data and
+mark these outliers for removal.
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{files/weight_unfiltered}
+        \caption{Raw weight}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{files/weight_filtered}
+        \caption{Filtered weight}
+    \end{subfigure}
+    \caption{Weight measurements before and after filtering}
+\end{figure}
 
 \section{Body representation}
 
