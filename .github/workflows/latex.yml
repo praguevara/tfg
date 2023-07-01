@@ -12,7 +12,12 @@ jobs:
           root_file: main.tex
           latexmk_use_xelatex: true
           latexmk_shell_escape: true
+      - name: Generate release tag
+        id: tag
+        run: |
+          echo "::set-output name=release_tag::build_$(date +"%s")"
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: ${{ steps.tag.outputs.release_tag }}
           files: main.pdf
