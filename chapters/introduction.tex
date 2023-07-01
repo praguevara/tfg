@@ -120,6 +120,7 @@ Human-specific generators have gained considerable attention in recent years,
 with several notable examples:
 
 \begin{itemize}
+	\item \textbf{SMPLify} \cite{SMPLify} is a method for estimating 3D human pose and shape from a single image.
 	\item \textbf{SiCloPe} \cite{SiCloPe} models clothed human bodies using deep generative models.
 	\item \textbf{PIFu} and \textbf{PIFuHD} \cite{PIFu, PIFuHD} are effective implicit representations aligning 2D image pixels with their corresponding 3D object.
 	\item \textbf{Tex2Shape} \cite{Tex2Shape} infers detailed full human body shape from a single photograph.
@@ -133,6 +134,55 @@ with several notable examples:
 For general-purpose generators, \textbf{CoCosNet} and its second version
 \cite{CoCosNet, CoCosNet2} have shown significant effectiveness in cross-domain
 image translation.
+
+\subsection{Parametric Models}
+
+Parametric models for representing and generating 3D human body shapes and
+poses have gained significant interest in recent years. These models are based
+on adjustable parameters that allow for pose and shape modifications, enabling
+the reconstruction and creation of unique human bodies. They find applications
+in animation, virtual reality, and garment simulation.
+
+One notable early work in this field is Allen's method, which utilizes a
+statistical model to create a parametric model of the human body. It matches
+the pose of a human in a 3D scan by interpolating from example scans with
+similar joint angles. However, it does not account for how body shape changes
+with pose, primarily serving as a hole-filling technique.
+
+Another significant model is SCAPE, which represents body deformations caused
+by shape and pose as triangle deformations. It uses linear regression to
+determine pose deformations. Although it aims to represent muscle deformations,
+it lacks specificity for different muscle activities and fails to capture
+motion-related tissue perturbations.
+
+BlendSCAPE extends the SCAPE model by optimizing shape and pose registration
+simultaneously using a blending technique. However, its formulation is
+incompatible with standard graphics packages and may not be suitable for common
+graphics applications.
+
+SymmetricSCAPE, a variant of SCAPE and BlendSCAPE, incorporates symmetry
+constraints to enhance the accuracy and stability of the model, resulting in a
+more robust representation of the 3D human body.
+
+The SMPL model is widely used for 3D human body shape and pose representation.
+It separates body shape and pose into parameters and employs a vertex-based
+skinning approach with corrective blend shapes, offering greater flexibility.
+It is compatible with various graphics applications.
+
+Improvements to the SMPL model include SMPL-H, which incorporates articulated
+hand pose and shape parameters, and SMPL-X, which includes hand and face pose
+and shape parameters.
+
+The STAR model addresses limitations of SMPL, such as reducing mesh volume
+around joints, by learning corrective blend shapes. It offers realistic
+deformations of the 3D human body while requiring fewer parameters than SMPL.
+
+Another approach is presented in BLSM, which utilizes a bone-level skinning
+method. It establishes the skeleton first by determining bone lengths and
+angles, incorporating identity-specific variations, and then applies linear
+blend skinning for animation.
+
+\todo{add citations}
 
 \subsection{Generative Neural Networks}
 
