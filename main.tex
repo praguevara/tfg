@@ -11,62 +11,26 @@
 % 1 - Si, 2 - No
 \def\OptimizaTikZ{1}
 
-% Archivo .TEX que incluye todas las configuraciones del documento y los paquetes. Añade todo aquello que necesites utilizar en el documento en este archivo.
-% En él se encuentra la configuración de los márgenes, establecidos según las directrices de estilo de la EPS.
 \input{include/configuracioninicial}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% INFORMACIÓN DEL TFG
-% Comentar lo que NO se desee añadir y sustituir con la información correcta.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Título y subtítulo
 \newcommand{\titulo}{Predicting future body shape before weight loss}
 \newcommand{\subtitulo}{Subtítulo del proyecto}
-% Datos del autor
+
 \newcommand{\miNombre}{Pablo Ramón Guevara}
-% Determinar género para etiquetas Autore/Autora/Autor (nb o en blanco,f,m)
-\newcommand{\miGenero}{m}
 \newcommand{\miEmail}{prg54@alu.ua.es}
-% Datos del tutor/es
-% Si no hay tutorB, comentar tutorB y dptoB para que la etiqueta sea Tutor:
+
 \newcommand{\miTutor}{Jorge Azorín López}
 \newcommand{\miTutorB}{Andrés Fuster Guilló}
 \newcommand{\departamentoTutor}{Department of Computer Science and Technology}
 \newcommand{\departamentoTutorB}{Department of Computer Science and Technology}
-% Datos de la facultad y universidad
+
 \newcommand{\miFacultad}{Escuela Politécnica Superior}
 \newcommand{\miFacultadCorto}{EPS UA}
 \newcommand{\miUniversidad}{\protect{Universidad de Alicante}}
 \newcommand{\miUbicacion}{Alicante}
 
-% ID	GRADO -------------------------------------------------
-% 1		Ingeniería en Imagen y Sonido en Telecomunicación
-% 2		Ingeniería Civil
-% 3		Ingeniería Química
-% 4		Ingeniería Informática
-% 5		Ingeniería Multimedia
-% 6		Arquitectura Técnica
-% 7		Arquitectura
-% 8		Robótica
-% %		%%%%%%%%%%%%
-% ID	MÁSTER ------------------------------------------------
-% A		Telecomunicación
-% B		Caminos, Canales y Puertos
-% C		Gestión en la Edificación
-% D		Desarrollo Web
-% E		Materiales, Agua, Terreno
-% F		Informática
-% G 	Automática y Robótica
-% H		Prevención de riesgos laborales
-% I		Gestión Sostenible Agua
-% J		Desarrollo Aplicaciones Móviles
-% K		Ingeniería Química
-% L		Ciberseguridad
-% M		Ingeniería Geológica
+\def\IDtitulo{4}
 
-\def\IDtitulo{4} % INTRODUCE LA ID DE TU TITULACIÓN
-
-% Configuración automática según el identificador elegido
 \input{include/configuraciontitulacion}
 
 % Información añadida a las propiedades del archivo PDF.
@@ -95,8 +59,7 @@
 \input{include/portada/portada_bn} % Portada B/N
 
 %%%%% PREAMBULO
-% Incluye el .tex que contiene el preámbulo, agradecimientos y dedicatorias.
-\input{chapters/00-preamblewiththanks}
+\input{chapters/preamblewiththanks}
 
 % Incluye después del archivo anterior el indice y lista de figuras, tablas y códigos.
 \tableofcontents	% Índice
@@ -109,13 +72,11 @@
 %%%%
 % CONTENIDO. CAPÍTULOS DEL TRABAJO - Añade o elimina según tus necesidades
 %%%%
-\input{chapters/01-introduction}
-\input{chapters/02-stateoftheart}
-\input{chapters/03-objectives}
-\input{chapters/04-methodology}
-\input{chapters/05-development}
-\input{chapters/06-results}
-\input{chapters/07-conclusion}
+\input{chapters/introduction}
+\input{chapters/data}
+\input{chapters/nn}
+\input{chapters/results}
+\input{chapters/conclusion}
 
 %%%%
 % CONTENIDO. BIBLIOGRAFÍA.
