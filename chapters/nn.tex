@@ -1,5 +1,7 @@
 \chapter{Neural network}\label{chap:nn}
 
+\todo{what are neural networks and why are they useful?}
+
 \section{Selection of Neural Network Architecture}
 
 In light of the temporal nature of our data, we required a neural network
@@ -28,12 +30,17 @@ utilizing an \gls{lstm}.
 \section{Neural network architecture}
 
 Utilizing the PyTorch library, we built our custom \gls{lstm}-based neural
-network architecture. PyTorch's \texttt{pack\_padded\_sequence} and
-\texttt{pad\_packed\_sequence} functions were used to pack and unpack sequences
-into single tensors, accommodating patients with varying numbers of sessions.
-An additional tensor of \textit{lengths} was used to facilitate the input of
-the packed sequences into the \gls{lstm}, which consequently ignored the values
-beyond the length of the sequence.
+network architecture. \todo{what is pytorch and why did we use it?}
+
+PyTorch's \texttt{pack\_padded\_sequence} and \texttt{pad\_packed\_sequence}
+functions were used to pack and unpack sequences into
+\href{https://pytorch.org/docs/stable/generated/torch.nn.utils.rnn.PackedSequence.html}{\texttt{PackedSequence}},
+accommodating patients with varying numbers of sessions. An additional tensor
+of \textit{lengths} was used to facilitate the input of the packed sequences
+into the \gls{lstm}, which consequently ignored the values beyond the length of
+the sequence.
+
+\todo{explain more?}
 
 \begin{figure}
     \centering
