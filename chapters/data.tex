@@ -1,4 +1,4 @@
-\chapter{Data analysis and preprocessing}\label{data}
+\chapter{Data analysis and preprocessing}\label{chap:data}
 
 Our data comprises approximately 400 sessions collected from 80 patients. These
 sessions were recorded at various time points and are not uniformly spaced.
@@ -148,3 +148,19 @@ $\beta_1$ has a large correlation with the body mass index.
     \end{tabular}
     \caption{Statistics of the shape parameters}
 \end{table}
+
+\section{Other datasets}
+
+We looked into other sources of data that could be used to improve the
+performance of our model. However, this turned out to be a difficult task.
+
+Most datasets regarding medical data are not publicly available, so it becomes
+difficult to see if they are useful for our task.
+
+There are open datasets that contain 3D scans of people, but they have the
+problem of not showing changes in a person's body. This means that we couldn't
+use them to show the evolution of a person's body.
+
+Due to these reasons, we decided to use only our data for training and
+evaluation. We performed some techniques for data augmentation, which we will
+discuss in the next chapter \ref {chap:nn}.

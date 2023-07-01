@@ -31,12 +31,12 @@ aimed to boost motivation and increase treatment plan adherence.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=75pt]{files/patient_8/2_cropped}
-	\includegraphics[width=75pt]{files/patient_8/3_cropped}
-	\includegraphics[width=75pt]{files/patient_8/4_cropped}
-	\includegraphics[width=75pt]{files/patient_8/5_cropped}
-	\includegraphics[width=75pt]{files/patient_8/6_cropped}
-	\caption{3D model reconstruction of a patient's body at different stages of a weight loss
+	\includegraphics[width=75pt]{files/patient_8/8_2}
+	\includegraphics[width=75pt]{files/patient_8/8_3}
+	\includegraphics[width=75pt]{files/patient_8/8_4}
+	\includegraphics[width=75pt]{files/patient_8/8_5}
+	\includegraphics[width=75pt]{files/patient_8/8_6}
+	\caption[Reconstructed 3D body of a patient's scans]{3D model reconstruction of a patient's body at different stages of a weight loss
 		treatment. There is around a month between each scan, and a total
 		weight loss of 3.8 kg.}
 \end{figure}
@@ -59,14 +59,14 @@ body changes, training and evaluating the model and finally, generating 3D
 meshes of the predicted body changes.
 
 We will expand on the details of this process in the following chapters.
-Chapter \nameref{data} will delve into the data collected during the previous
-study, and how we processed it to prepare it for use in our model, as well as
-how we encoded the human body scans. Afterwards, chapter \nameref{nn} will go
-over the neural network architecture we devised for this project, as well as
-the training process and the results obtained. Finally, chapter
-\nameref{results} will discuss the results of our model, and chapter
-\nameref{conclusion} will conclude the document with a summary of the work done
-and possible future lines of research.
+Chapter \nameref{chap:data} will delve into the data collected during the
+previous study, and how we processed it to prepare it for use in our model, as
+well as how we encoded the human body scans. Afterwards, chapter
+\nameref{chap:nn} will go over the neural network architecture we devised for
+this project, as well as the training process and the results obtained.
+Finally, chapter \nameref{chap:results} will discuss the results of our model,
+and chapter \nameref{chap:conclusion} will conclude the document with a summary
+of the work done and possible future lines of research.
 
 \section{Background}
 
@@ -216,22 +216,22 @@ literature.
 \section{Objectives}\label{objectives}
 
 \begin{itemize}
-	\item \strong{Objective 1} Study the state of the art in human body representation and
+	\item \textbf{Objective 1} Study the state of the art in human body representation and
 	      generation. \subitem Review the literature on human body representation and
 	      generation. \subitem Analyze the advantages and disadvantages of the different
 	      approaches. \subitem Select the most suitable approach for the project.
-	\item \strong{Objective 2} Analyze and process the data to be used in the project. \subitem
+	\item \textbf{Objective 2} Analyze and process the data to be used in the project. \subitem
 	      Explore the data and its characteristics. \subitem Preprocess the data to be
 	      used in the project, identifying and solving any issues that may arise.
 	      \subitem Study what data augmentation techniques can be applied to the data.
-	\item \strong{Objective 3} Design and implement a neural network that can understand human
+	\item \textbf{Objective 3} Design and implement a neural network that can understand human
 	      bodies and train it to predict shape changes in time. \subitem Study the
 	      different neural network architectures that can be used in a time series
 	      prediction problem. \subitem Design a neural network architecture that can be
 	      used to generate future human body shapes. \subitem Implement the neural
 	      network architecture. \subitem Train the neural network. \subitem Evaluate the
 	      predictions made by the neural network.
-	\item \strong{Objective 4} Evaluate the results. \subitem Generate predicted human body
+	\item \textbf{Objective 4} Evaluate the results. \subitem Generate predicted human body
 	      shapes for a set of input data. \subitem Evaluate the predictions.
 \end{itemize}
 
