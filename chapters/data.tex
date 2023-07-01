@@ -1,9 +1,9 @@
-\chapter{Data analysis and preprocessing}\label{chap:data}
+\chapter{Data Analysis and Preprocessing}\label{chap:data}
 
-Our data comprises approximately 400 sessions collected from 80 patients. These
-sessions were recorded at various time points and are not uniformly spaced.
-Each session's data includes a 3D scan of the patient, along with several
-measurements such as weight, height, body fat percentage, etc.
+Our dataset comprises approximately 400 sessions obtained from 80 distinct
+patients. These sessions, recorded at irregular intervals, incorporate a 3D
+scan of the patient and a multitude of other measurements such as weight,
+height, body fat percentage, and more.
 
 \begin{table}[h]
     \centering
@@ -11,7 +11,7 @@ measurements such as weight, height, body fat percentage, etc.
         \toprule
         Type                               & Source                                                                                         & Measurement (unit)                        \\
         \midrule
-        \multirow{3}{*}{Anthropometric}    & \multirow{3}{4cm}{flexible measuring tape}                                                     & Wrist (cm) (kg)                           \\
+        \multirow{3}{*}{Anthropometric}    & \multirow{3}{4cm}{flexible measuring tape}                                                     & Wrist (cm)                                \\
                                            &                                                                                                & Waist (cm)                                \\
                                            &                                                                                                & Hip (cm)                                  \\
         \midrule
@@ -47,49 +47,47 @@ measurements such as weight, height, body fat percentage, etc.
 \end{table}
 
 \todo[]{${https://rua.ua.es/dspace/bitstream/10045/124160/6/Garcia-dUrso_etal_2022_IEEEAccess.pdf}$}
-
-However, the data requires cleaning before usage. Some sessions lack certain
-measurements, and there are numerous outliers within the data. After cleaning,
-we utilized about 200 sessions.
+The raw data, however, required extensive cleaning before it could be analyzed. We encountered sessions missing certain measurements and numerous data outliers. After our data cleaning process, we were left with approximately 200 viable sessions.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{files/sessions_per_patient}
-    \caption{Number of sessions per patient}
+    \caption{Variation in the number of sessions per patient}
     \label{fig:sessions-per-patient}
 \end{figure}
 
-\subsection{Data cleaning}
+As Figure~\ref{fig:sessions-per-patient} illustrates, the number of sessions
+per patient varied significantly, with some patients attending only a single
+session and others attending over ten. Given that neural networks necessitate
+uniform input shapes, we were faced with a challenge. We'll elaborate on how we
+tackled this problem in Chapter \ref{chap:nn}.
+\subsection{Data Cleaning and Outlier Detection}
 
-We developed a data cleaning pipeline using the \gls{pandas} library. This
-pipeline fixes some errors in the data, removes outliers and sessions with
-missing measurements.
+A data cleaning pipeline was constructed utilizing the \gls{pandas} library.
+Essential steps encompassed missing data treatment, duplicate removal, and
+variable unit standardization.
 
-In order to do this data cleaning, we indexed the dataset with a multi-index
-containing the patient's id and the number of the session. This allowed us to
-iterate over the data in a per-patient basis, and to easily identify patients
-with problems in their data.
+We indexed our dataset with a multi-index that included the patient's id and
+the session number. This system facilitated patient-specific data iteration and
+simplified the process of pinpointing patient data discrepancies.
 
-After plotting and examining the data, we identified that one of the most
-common issues was due to the decimal separator. Many measurements were off by a
-factor of 10, so we implemented custom rules to solve this issue. We also
-implemented rules to locate and remove values that were out of range or that
-didn't match to other measurements.
-
-Some of them are:
+Upon scrutinizing plotted data, we discovered that the decimal separator was a
+common source of errors. Many measurements appeared to be inflated by a factor
+of 10, prompting us to devise tailored rules to correct this. Additional rules
+were implemented to identify and discard out-of-range values or those
+conflicting with other measurements. These rules included:
 
 \begin{itemize}
-    \item Variation between measurements of different limbs. For example, the difference
-          in muscle or fat percentage between the left and right arm should be small.
-    \item The sum of the fat and muscle percentages should be less than 100\%.
-    \item Percentage levels of fat and muscle should be less than 100\%. If they are,
-          that probably means that the measurement is off by a factor of 10.
+    \item Small variation between measurements of different limbs, such as muscle or fat
+          percentage discrepancies between left and right arms.
+    \item Ensuring that the combined muscle and fat percentages do not exceed 100%.
+    \item Verifying that the fat and muscle percentage levels individually stay below 100%—values exceeding this typically indicate a measurement inflated by a factor of 10.
 \end{itemize}
 
-Even after fixing these issues there were still some outliers. We tested a
-system that detected extreme changes between sessions, but this was too prone
-to false positives. In the end, we opted to manually visualize the data and
-mark these outliers for removal.
+Despite these rectifications, some outliers persisted. We experimented with a
+system that flagged dramatic session-to-session changes, but found it too
+susceptible to false positives. Eventually, we opted to manually inspect the
+data, flagging conspicuous outliers for removal.
 
 \begin{figure}[h]
     \centering
@@ -103,10 +101,9 @@ mark these outliers for removal.
         \includegraphics[width=0.8\textwidth]{files/weight_filtered}
         \caption{Filtered weight}
     \end{subfigure}
-    \caption{Weight measurements before and after filtering}
+    \caption{Weight measurements pre and post filtering}
 \end{figure}
-
-\section{Body representation}
+\section{SMPL for Body Representation}
 
 In order to represent the body shape we opted to use \gls{smpl}. \gls{smpl}
 encodes the body shape and pose using a low-dimensional linear space. The body
@@ -115,14 +112,37 @@ using 72 pose parameters ($\theta$). As our interest lies in body shape, we
 employed only the shape parameters.
 
 We extracted \gls{smpl} parameters --- shape ($\beta$) and pose ($\theta$) ---
-from the 3D scans using a custom minimization algorithm.
+from the 3D scans using a custom minimization algorithm. This procedure
+consisted of:
 
-\input{chapters/beta-fig}
+\begin{itemize}
+    \item Acquiring and Preprocessing of 3D Data: The Tech4Diet project's system, fitted
+          with 13 Intel RealSense RGB-D cameras, was used to capture the 3D data. This
+          data was then preprocessed to minimize noise and optimize 3D scan alignment.
 
-Figure~\ref{fig:beta-vis} shows the effect of varying the shape parameters. We
-have used a scale of 3 to better show their effect, but in practice the values
-are much smaller. $\beta_0$ controls the overall height of the body, while
-$\beta_1$ has a large correlation with the body mass index.
+    \item Estimating an Intermediate Template using a BPS Neural Network: The \gls{bps}
+          method was used to generate an intermediate 3D model by encoding a set of
+          points into fixed-distance representations. A DenseNet neural network then took
+          this \gls{bps} representation as input to predict the vertex positions of a
+          template resembling the input point cloud.
+
+    \item First Minimization: \gls{bps} to \gls{smpl}: We minimized the pose and shape
+          parameters of the \gls{smpl} model to align it with the template created by the
+          \gls{bps}.
+
+    \item Second Minimization: 3D Scan to \gls{smpl}: A second minimization was performed
+          to align the \gls{smpl} model with the 3D scan from the RGB-D sensors. We
+          proposed an algorithm to enhance the speed and accuracy of this process by
+          segmenting the model into body parts, applying rigid registration, and then
+          using a custom minimization function that considered both distance and normal
+          angles.
+\end{itemize}\todo{cite soco2023 nahuel}
+
+Figure~\ref{fig:beta-vis} demonstrates the effects of shape parameter
+variations. Although we employed a scale of 3 to amplify their effects for
+visualization, actual values are significantly lower. $\beta_0$ regulates the
+overall body height, while $\beta_1$ is highly correlated with the body mass
+index.
 
 \begin{table}[h]
     \centering
@@ -149,18 +169,37 @@ $\beta_1$ has a large correlation with the body mass index.
     \caption{Statistics of the shape parameters}
 \end{table}
 
-\section{Other datasets}
+\section{Exploring Additional Datasets}
 
-We looked into other sources of data that could be used to improve the
-performance of our model. However, this turned out to be a difficult task.
+The pursuit of diverse, informative, and applicable data sources is a
+significant undertaking when aiming to enhance model performance. In our case,
+the quest for additional data proved to be notably challenging due to several
+factors.
 
-Most datasets regarding medical data are not publicly available, so it becomes
-difficult to see if they are useful for our task.
+Firstly, the majority of medical data sets are not readily accessible to the
+public. Their inaccessibility is primarily due to privacy and confidentiality
+concerns, which are paramount in the realm of medical and health data. The
+restrictions on these datasets not only limit their availability but also
+obscure their potential usefulness for our research. Without the opportunity to
+delve into the contents of these datasets, determining their relevance and
+applicability to our work becomes a considerable hurdle.
 
-There are open datasets that contain 3D scans of people, but they have the
-problem of not showing changes in a person's body. This means that we couldn't
-use them to show the evolution of a person's body.
+Secondly, while open-source datasets featuring 3D scans of individuals exist,
+they often lack the dynamic quality crucial to our study. Specifically, these
+datasets tend to offer static, one-time captures of an individual's physique,
+without capturing the temporal changes in body composition. Thus, such datasets
+are ill-suited for our purposes since they lack the capability to portray the
+progression or regression of an individual's body shape over time — a vital
+element for our research into tracking the effects of dietary interventions.
 
-Due to these reasons, we decided to use only our data for training and
-evaluation. We performed some techniques for data augmentation, which we will
-discuss in the next chapter \ref {chap:nn}.
+Moreover, we explored datasets not explicitly designed for body composition
+study but still containing potentially relevant data, such as datasets from
+sports science or anthropometry. However, the limitations in scope, data
+granularity, and the lack of consistent body composition measurements made
+these datasets inadequate for our purposes.
+
+Upon careful consideration of these challenges, we chose to rely solely on our
+proprietary data for model training and evaluation. However, to mitigate the
+limitations of our data, we implemented data augmentation techniques designed
+to enhance and diversify our dataset artificially. We will delve into the
+specifics of these strategies in Chapter \ref{chap:nn}.

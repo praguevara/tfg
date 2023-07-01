@@ -40,11 +40,11 @@
 %\usepackage[type=upperleft,showframe,marklength=8mm]{fgruler}
 % MÁRGENES DE LAS PÁGINAS
 \usepackage[
-  inner	=	3.0cm, % Margen interior
-  outer	=	2.5cm, % Margen exterior
-  top	=	2.5cm, % Margen superior
-  bottom=	2.5cm, % Margen inferior
-  includeheadfoot, % Incluye cabecera y pie de página en los márgenes
+    inner	=	3.0cm, % Margen interior
+    outer	=	2.5cm, % Margen exterior
+    top	=	2.5cm, % Margen superior
+    bottom=	2.5cm, % Margen inferior
+    includeheadfoot, % Incluye cabecera y pie de página en los márgenes
 ]{geometry}
 % Valor de interlineado
 \renewcommand{\baselinestretch}{1.0} % 1 línea de interlineado
@@ -126,11 +126,11 @@
 % para agilizar el procesado y tenerlas para utilizarlas en otros
 % documentos
 \if\OptimizaTikZ 1
-  \usepgfplotslibrary{external}
-  \tikzexternalize[prefix=files/processed-figures/] % Ruta
-  \tikzset{%
-    external/system call ={xelatex -enable-write18 -halt-on-error -interaction=batchmode -jobname "\image" "\texsource"},
-  }
+    \usepgfplotslibrary{external}
+    \tikzexternalize[prefix=files/processed-figures/] % Ruta
+    \tikzset{%
+        external/system call ={xelatex -enable-write18 -halt-on-error -interaction=batchmode -jobname "\image" "\texsource"},
+    }
 \fi
 
 % Estilos para elementos graficos
@@ -210,18 +210,19 @@
 \usepackage{rotating}
 % Para incluir comentarios en el texto. El parámetro 'disable' oculta todas las notas.
 % USO: \todo{tutexto}
-\usepackage[textsize=tiny,shadow,textwidth=2cm]{todonotes}
+\setlength {\marginparwidth }{2cm}
+\usepackage[textsize=tiny,shadow,textwidth=2cm, loadshadowlibrary]{todonotes}
 %\reversemarginpar % Descomentar si se quiere todos los comentarios en el mismo lado
 % Desactiva la exportación de los ToDo y Missingfigures como figuras
 \if\OptimizaTikZ 1
-  \makeatletter
-  \renewcommand{\todo}[2][]{\tikzexternaldisable\@todo[#1]{#2}\tikzexternalenable}
-  \makeatother
-  \usepackage{letltxmacro}
-  \LetLtxMacro{\oldmissingfigure}{\missingfigure}
-  \makeatletter
-  \renewcommand{\missingfigure}[2][]{\tikzexternaldisable\oldmissingfigure[{#1}]{#2}\tikzexternalenable}
-  \makeatother
+    \makeatletter
+    \renewcommand{\todo}[2][]{\tikzexternaldisable\@todo[#1]{#2}\tikzexternalenable}
+    \makeatother
+    \usepackage{letltxmacro}
+    \LetLtxMacro{\oldmissingfigure}{\missingfigure}
+    \makeatletter
+    \renewcommand{\missingfigure}[2][]{\tikzexternaldisable\oldmissingfigure[{#1}]{#2}\tikzexternalenable}
+    \makeatother
 \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%% 
@@ -230,8 +231,8 @@
 \usepackage[acronym,nonumberlist,toc]{glossaries}
 \usepackage{glossary-superragged}
 \newglossarystyle{modsuper}{%
-  \setglossarystyle{super}%
-  \renewcommand{\glsgroupskip}{}
+    \setglossarystyle{super}%
+    \renewcommand{\glsgroupskip}{}
 }
 \renewcommand{\glsnamefont}[1]{\textbf{#1}}
 
@@ -240,20 +241,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%
 % Para mostrar la fecha actual (mes año) con \Hoy
 \newcommand{\MES}{%
-  \ifcase\month% 0
-  \or January% 1
-  \or February% 2
-  \or March% 3
-  \or April% 4
-  \or May% 5
-  \or June% 6
-  \or July% 7
-  \or August% 8
-  \or September% 9
-  \or October% 10
-  \or November% 11
-  \or December% 12
-  \fi}
+    \ifcase\month% 0
+    \or January% 1
+    \or February% 2
+    \or March% 3
+    \or April% 4
+    \or May% 5
+    \or June% 6
+    \or July% 7
+    \or August% 8
+    \or September% 9
+    \or October% 10
+    \or November% 11
+    \or December% 12
+    \fi}
 \newcommand{\ANYO}{\number\year}
 \newcommand{\Hoy}{\MES\ \ANYO}
 
