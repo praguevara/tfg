@@ -75,8 +75,8 @@ of different portions of an input sequence, allowing them to focus on the most
 relevant parts.
 
 The key innovation of Transformer models is their focus on attention
-mechanisms, particularly the so-called "Scaled Dot-Product Attention" and
-"Multi-Head Attention". In contrast to \glspl{rnn} which process sequence data
+mechanisms, particularly the so-called `Scaled Dot-Product Attention' and
+`Multi-Head Attention'. In contrast to \glspl{rnn} which process sequence data
 iteratively, attention mechanisms allow Transformers to process entire
 sequences of data simultaneously, enabling them to capture long-range
 dependencies in the data more effectively.
@@ -94,7 +94,7 @@ These are the key components of these networks networks:
           The output is the weighted sum of the values.
 
     \item \textbf{Multi-Head Attention:} This is simply a way of using multiple
-          attention mechanisms (or 'heads') in parallel, each with its learned linear
+          attention mechanisms (or `heads') in parallel, each with its learned linear
           transformations of the original queries, keys, and values. The outputs of
           each head are concatenated and linearly transformed to result in the final output.
 
@@ -273,7 +273,7 @@ results and were excluded to prevent overfitting.
 A loss function, also known as a cost function, is a mathematical function that
 quantifies how well a machine learning model performs a specific task. For a
 neural network, the loss function measures the difference between the predicted
-output of the model and the actual target values (the "truth"). The goal during
+output of the model and the actual target values (the `truth'). The goal during
 the training process is to minimize this loss, thereby making the model's
 predictions as close as possible to the true values.
 
@@ -284,6 +284,21 @@ these across all samples. For binary classification problems, Binary
 Cross-Entropy (also known as log loss) is often used, which quantifies the
 difference between the true class and predicted probability. For multi-class
 classification problems, Categorical Cross-Entropy is frequently used.
+
+\begin{figure}[H]
+    \begin{subfigure}{\textwidth}
+        \[ \text{MSE}(y, \hat{y}) = \frac{1}{n} \sum_{i=1}^{n}(y_i - \hat{y}_i)^2 \]
+    \end{subfigure}
+
+    \begin{subfigure}{\textwidth}
+        \[ \text{BCE}(y, \hat{y}) = -\frac{1}{n} \sum_{i=1}^{n} [y_i \log(\hat{y}_i) + (1 - y_i) \log(1 - \hat{y}_i)] \]
+    \end{subfigure}
+
+    \begin{subfigure}{\textwidth}
+        \[ \text{CCE}(y, \hat{y}) = -\frac{1}{n} \sum_{i=1}^{n} \sum_{j=1}^{m} y_{ij} \log(\hat{y}_{ij}) \]
+    \end{subfigure}
+    \caption{Common loss functions}
+\end{figure}
 
 \subsection{Optimizer}
 
@@ -303,12 +318,25 @@ model incrementally moving towards the region of minimum error in the parameter
 space. Despite its simplicity, \gls{sgd} can be slow and susceptible to getting stuck
 in local minima for complex models and loss function landscapes.
 
+\begin{figure}[H]
+    \[ w := w - \eta\nabla Q_i(w) \]
+    \caption{\gls{sgd} update rule}
+\end{figure}
+
 \textbf{\gls{rmsprop}} is an adaptive learning rate method
 designed to address some of the shortcomings of \gls{sgd}. \gls{rmsprop} changes the
 learning rate by dividing it by an exponentially decaying average of squared
 gradients. This method helps to attenuate the updates for frequent and high
 gradients, thus allowing the optimizer to converge faster and reducing the
 likelihood of getting stuck in local minima.
+
+\begin{figure}[H]
+    \begin{align*}
+        g & := \beta g + (1 - \beta) (\nabla Q_i(w))^2,            \\
+        w & := w - \frac{\eta}{\sqrt{g + \epsilon}} \nabla Q_i(w).
+    \end{align*}
+    \caption{\gls{rmsprop} update rule}
+\end{figure}
 
 \textbf{\gls{adam}} combines the best properties of \gls{rmsprop} and
 momentum to provide an optimization method that can handle sparse gradients and
@@ -319,6 +347,17 @@ first moment (the mean) and the second raw moment (the uncentered variance) of
 the gradients. This combination allows \gls{adam} to achieve fast convergence and
 high accuracy.
 
+\begin{figure}[H]
+    \begin{align*}
+        m       & := \beta_1 m + (1 - \beta_1) \nabla Q_i(w),            \\
+        v       & := \beta_2 v + (1 - \beta_2) (\nabla Q_i(w))^2,        \\
+        \hat{m} & := \frac{m}{1 - \beta_1^t},                            \\
+        \hat{v} & := \frac{v}{1 - \beta_2^t},                            \\
+        w       & := w - \frac{\eta \hat{m}}{\sqrt{\hat{v}} + \epsilon}.
+    \end{align*}
+    \caption{\gls{adam} update rule}
+\end{figure}
+
 \textbf{\gls{adamw}} is a modification of the \gls{adam} optimizer that decouples the weight decay
 from the optimization steps. While the original \gls{adam} applies weight decay
 before the optimization step, \gls{adamw} applies it directly to the weights after
@@ -327,8 +366,24 @@ regularization. This decoupling can lead to better training results,
 particularly with larger models and small batch sizes, and has since become a
 popular choice in the deep learning community.
 
+\begin{figure}[H]
+    \begin{align*}
+        m       & := \beta_1 m + (1 - \beta_1) \nabla Q_i(w),                               \\
+        v       & := \beta_2 v + (1 - \beta_2) (\nabla Q_i(w))^2,                           \\
+        \hat{m} & := \frac{m}{1 - \beta_1^t},                                               \\
+        \hat{v} & := \frac{v}{1 - \beta_2^t},                                               \\
+        w       & := (1 - \lambda \eta) w - \frac{\eta \hat{m}}{\sqrt{\hat{v}} + \epsilon}.
+    \end{align*}
+    \caption{\gls{adamw} update rule}
+\end{figure}
+
 We utilized the \gls{adamw} optimizer with a variable learning rate and weight
 decay, along with \gls{mse} loss as the objective function.
+
+During training, we employed early stopping to prevent overfitting. We
+monitored the validation loss and stopped training if it did not improve for 50
+epochs. We then loaded the model with the lowest validation loss and used it
+for inference.
 
 \subsection{Hyperparameter tuning}
 
@@ -355,6 +410,20 @@ Table~\ref{tab:final-hyperparameters}.
 \end{table}
 
 \section{Results}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{files/loss}
+    \caption{MSE loss during training}
+    \label{fig:loss}
+\end{figure}
+
+We can see in Figure \ref{fig:loss} that the loss decreases rapidly in the
+first few epochs, and then slowly converges to a minimum. The training loss
+keeps decreasing, while the validation loss slows down but doesn't increase,
+which indicates that the model is not overfitting.
+
+\subsection{Predictions}
 
 While a more detailed analysis of the results will be presented in the next
 chapter, we provide some examples of our model's predictions.
