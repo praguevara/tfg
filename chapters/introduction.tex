@@ -6,30 +6,39 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Introduction}
 
-This chapter will introduce the reader to the context of this project. It
-starts by providing a succinct overview of the problem at hand, followed by a
-detailed discussion of the motivation underpinning this work. Lastly, it will
-provide an outline of the subsequent chapters in the document.
+This chapter sets the stage for the scope of this project. It provides a brief
+summary of the issue in question, proceeds with an extensive discourse on the
+project's inspiration, and finally, presents an overview of the chapters that
+follow in this document.
 
 \section{Motivation and Context}
 
-Obesity poses a significant global public health concern, affecting a
-substantial segment of the global population. \todo{Elaborate on why obesity is
-	a pressing issue}.
+Addressing the global challenge of obesity, which affects a considerable
+proportion of the population, is a matter of public health concern. Having
+experienced the struggles of obesity first-hand, I am deeply committed to
+addressing this issue. It is my belief that our society can greatly benefit
+from reducing the impact of obesity, ultimately enhancing the quality of life
+for countless individuals. This project aims to contribute towards achieving
+this goal.
 
-Tech4Diet is a research project that seeks to understand how obesity treatments
-induce morphological changes in the human body. \todo{Provide more details
-	about Tech4Diet}
+Tech4Diet, a research initiative supported by the \textit{Agencia Estatal de
+	Investigación} and the \textit{Fondo Europeo de Desarrollo Regional} (FEDER),
+aims to examine how obesity treatments induce morphological changes in the
+human body, with Jorge Azorín López spearheading the project.
 
-In a previous initiative, \todo{Provide a reference link} Tech4Diet developed a
-system that allowed patients undergoing weight loss treatment to visualize 3D
-scans of their bodies throughout their journey~\cite{Azorin-Lopez2020}.
+Tech4Diet is a research initiative that investigates the morphological changes
+induced by obesity treatments in the human body. The project has been supported
+by the \textit{Agencia Estatal de Investigación} and the \textit{Fondo Europeo
+	de Desarrollo Regional} (FEDER), under the leadership of Jorge Azorín López.
 
-During the treatment, the patient's body is captured using an RGBD camera,
-specifically the Intel RealSense D435. The 3D model of the human body is
-displayed during different sessions using a virtual reality headset. This
-innovative approach was designed to enhance motivation and boost adherence to
-the treatment plan.
+In an earlier venture, Tech4Diet developed a system that enabled patients
+undergoing weight loss treatment to visualize their body's 3D scans throughout
+their journey (reference required). The patient's body is captured during the
+treatment using an RGB-D camera, more specifically the Intel RealSense D435.
+This 3D model of the human body is presented to the patient during various
+sessions through a virtual reality headset. This innovative method was
+conceived to strengthen motivation and increase adherence to the treatment
+program.
 
 \begin{figure}
 	\centering
@@ -60,22 +69,23 @@ representation, designing a neural network architecture for predicting patient
 body changes, training, and evaluating the model. Ultimately, the model
 generates 3D meshes of the predicted body changes.
 
-The following chapters will delve into the details of this process. Chapter
-\ref{chap:data} discusses the data collected during the previous study, and how
-we prepared it for use in our model. It also presents how we encoded the human
-body scans. Chapter \ref{chap:nn} reviews the neural network architecture we
-formulated for this project, including the training process and the results
-obtained. Chapter \ref{chap:results} interprets the results of our model, and
-chapter \ref{chap:conclusion} concludes the document by summarizing the work
-done and suggesting possible future lines of research.
+The following chapters will delve deeper into the specifics of this process.
+Chapter \ref{chap:data} examines the data collected during the previous study
+and explains how we prepared it for use in our model. It also delineates the
+encoding process of the human body scans. Chapter \ref{chap:nn} explores the
+neural network architecture we constructed for this project, including the
+training process and the results we obtained. Chapter \ref{chap:results}
+interprets the outcomes of our model, and chapter \ref{chap:conclusion}
+concludes the document by recapping the work done and suggesting potential
+future research directions.
 
 \section{Background}
 
 In this section, we provide a comprehensive overview of the state-of-the-art
-methodologies for human body representation, the generation of these models,
-and the deployment of generative neural networks. The knowledge derived from
-these studies has paved the way for our submission to the \gls{iwann} 2023
-conference. \todo{link}
+methodologies for human body representation, as well as a first overview of
+generative neural networks suitable for our purpose. The knowledge derived from
+these studies in human body representation paved the way for a submission to
+the \gls{iwann} 2023 conference. \todo{link}
 
 \subsection{3D Human Body Representation}
 
@@ -102,6 +112,7 @@ required input type and the resulting output:
 \subsubsection{Output Types}
 
 \begin{itemize}
+	\item \textbf{2D space:} These models output human bodies in 2D pixel space, such as images or videos.
 	\item \textbf{3D meshes:} Models that generate a 3D mesh of the body.
 	\item \textbf{3D voxel:} Models that produce a 3D voxel grid of the body.
 	\item \textbf{\gls{nerf}:} Models that render the object directly from a specific viewpoint.
@@ -120,20 +131,19 @@ Human-specific generators have gained considerable attention in recent years,
 with several notable examples:
 
 \begin{itemize}
-	\item \textbf{SMPLify} \cite{SMPLify} is a method for estimating 3D human pose and shape from a single image.
-	\item \textbf{SiCloPe} \cite{SiCloPe} models clothed human bodies using deep generative models.
-	\item \textbf{PIFu} and \textbf{PIFuHD} \cite{PIFu, PIFuHD} are effective implicit representations aligning 2D image pixels with their corresponding 3D object.
-	\item \textbf{Tex2Shape} \cite{Tex2Shape} infers detailed full human body shape from a single photograph.
-	\item \textbf{HumanMeshNet} \cite{HumanMeshNet} and \textbf{DeepHuman} \cite{DeepHuman} focus on 3D human body reconstruction from a monocular image.
-	\item \textbf{HumanGen} \cite{humangen} provides a detailed 360° realistic free-view rendering of the human body.
-	\item \textbf{HumanNeRF} \cite{humannerf} offers a high-fidelity free-view synthesis of dynamic humans.
+	\item \textbf{SiCloPe} \cite{DBLP:journals/corr/abs-1901-00049} models clothed human bodies using deep generative models.
+	\item \textbf{PIFu} and \textbf{PIFuHD} \cite{pifu, pifuhd} are effective implicit representations aligning 2D image pixels with their corresponding 3D object.
+	\item \textbf{Tex2Shape} \cite{alldieck2019tex2shape} infers detailed full human body shape from a single photograph.
+	\item \textbf{HumanMeshNet} \cite{DBLP:journals/corr/abs-1908-06544} and \textbf{DeepHuman} \cite{DBLP:journals/corr/abs-1903-06473} focus on 3D human body reconstruction from a monocular image.
+	\item \textbf{HumanGen} \cite{jiang2022humangen} provides a detailed 360° realistic free-view rendering of the human body.
+	\item \textbf{HumanNeRF} \cite{weng_humannerf_2022_cvpr} offers a high-fidelity free-view synthesis of dynamic humans.
 \end{itemize}
 
 \subsubsection{General Purpose Generators}
 
 For general-purpose generators, \textbf{CoCosNet} and its second version
-\cite{CoCosNet, CoCosNet2} have shown significant effectiveness in cross-domain
-image translation.
+\cite{Zhang_2020_CVPR, Zhou_2021_CVPR} have shown significant effectiveness in
+cross-domain image translation.
 
 \subsection{Parametric Models}
 
@@ -143,61 +153,99 @@ on adjustable parameters that allow for pose and shape modifications, enabling
 the reconstruction and creation of unique human bodies. They find applications
 in animation, virtual reality, and garment simulation.
 
-One notable early work in this field is Allen's method, which utilizes a
-statistical model to create a parametric model of the human body. It matches
-the pose of a human in a 3D scan by interpolating from example scans with
-similar joint angles. However, it does not account for how body shape changes
-with pose, primarily serving as a hole-filling technique.
+One notable early work in this field is Allen's method \cite{allen:2003}, which
+utilizes a statistical model to create a parametric model of the human body. It
+matches the pose of a human in a 3D scan by interpolating from example scans
+with similar joint angles. However, it does not account for how body shape
+changes with pose, primarily serving as a hole-filling technique.
 
-Another significant model is SCAPE, which represents body deformations caused
-by shape and pose as triangle deformations. It uses linear regression to
-determine pose deformations. Although it aims to represent muscle deformations,
-it lacks specificity for different muscle activities and fails to capture
-motion-related tissue perturbations.
+Another significant model is SCAPE \cite{scape}, which represents body
+deformations caused by shape and pose as triangle deformations. It uses linear
+regression to determine pose deformations. Although it aims to represent muscle
+deformations, it lacks specificity for different muscle activities and fails to
+capture motion-related tissue perturbations.
 
-BlendSCAPE extends the SCAPE model by optimizing shape and pose registration
-simultaneously using a blending technique. However, its formulation is
-incompatible with standard graphics packages and may not be suitable for common
-graphics applications.
+BlendSCAPE \cite{blendscape} extends the SCAPE model by optimizing shape and
+pose registration simultaneously using a blending technique. However, its
+formulation is incompatible with standard graphics packages and may not be
+suitable for common graphics applications.
 
-SymmetricSCAPE, a variant of SCAPE and BlendSCAPE, incorporates symmetry
-constraints to enhance the accuracy and stability of the model, resulting in a
-more robust representation of the 3D human body.
+SymmetricSCAPE \cite{CHEN201952}, a variant of SCAPE and BlendSCAPE,
+incorporates symmetry constraints to enhance the accuracy and stability of the
+model, resulting in a more robust representation of the 3D human body.
 
-The SMPL model is widely used for 3D human body shape and pose representation.
-It separates body shape and pose into parameters and employs a vertex-based
-skinning approach with corrective blend shapes, offering greater flexibility.
-It is compatible with various graphics applications.
+The \gls{smpl} \cite{SMPL:2015} model is widely used for 3D human body shape
+and pose representation. It separates body shape and pose into parameters and
+employs a vertex-based skinning approach with corrective blend shapes, offering
+greater flexibility. It is compatible with various graphics applications.
 
 Improvements to the SMPL model include SMPL-H, which incorporates articulated
 hand pose and shape parameters, and SMPL-X, which includes hand and face pose
-and shape parameters.
+and shape parameters \cite{SMPL-X:2019}
 
-The STAR model addresses limitations of SMPL, such as reducing mesh volume
-around joints, by learning corrective blend shapes. It offers realistic
-deformations of the 3D human body while requiring fewer parameters than SMPL.
+The STAR model \cite{STAR:2020} addresses limitations of SMPL, such as reducing
+mesh volume around joints, by learning corrective blend shapes. It offers
+realistic deformations of the 3D human body while requiring fewer parameters
+than SMPL.
 
-Another approach is presented in BLSM, which utilizes a bone-level skinning
-method. It establishes the skeleton first by determining bone lengths and
-angles, incorporating identity-specific variations, and then applies linear
-blend skinning for animation.
+Another approach is presented in BLSM \cite{doi:10.1007/978-3-030-58558-7_1},
+which utilizes a bone-level skinning method. It establishes the skeleton first
+by determining bone lengths and angles, incorporating identity-specific
+variations, and then applies linear blend skinning for animation.
 
-\todo{add citations}
+\section{Neural Networks}
 
-\subsection{Generative Neural Networks}
+Neural networks, more formally known as artificial neural networks, are a
+subset of machine learning models inspired by biological brain systems. These
+computational models mimic the neurons' interconnections and behavior in a
+biological brain, which is how they derive the name "neural networks".
 
-Finally, generative neural networks such as Variational Autoencoders (VAEs) and
-Generative Adversarial Networks (GANs) have emerged as powerful tools for
-generating 3D models of the human body. They learn the distribution of the data
-and generate 3D human body models accordingly. They are widely applicable
-across various fields, including medicine, film and video game industries,
-extended reality, and clothing.
+At the core of a neural network is the concept of a "neuron" or "node". These
+neurons are organized into layers: the input layer, one or more hidden layers,
+and the output layer. Each neuron within these layers is interconnected with
+neurons from the subsequent layer.
 
-This general overview of the current state-of-the-art methodologies forms the
-foundation upon which we build our research. The following sections delve into
-our unique approach and the results obtained from our experiments.
+\textbf{Input layer:} This layer receives raw input signals,
+analogous to sensory data in a biological system.
 
-\section{Neural Network Architectures}\todo{}
+\textbf{Hidden layers:} These layers perform computations and transformations
+on the data from the previous layer. The complexity of the model increases with
+the number of hidden layers and neurons in each layer.
+
+\textbf{Output layer:} The final layer translates the outcomes of the hidden
+layers into the format relevant to the task at hand, be it classification,
+regression, or something else.
+
+Each connection between the neurons has an associated "weight", which impacts
+the input's influence on the output. During the training process, these weights
+are adjusted to minimize the difference between the predicted output and the
+actual output.
+
+Neural networks learn from data using a process called backpropagation, an
+algorithm that calculates the gradient of the loss function (a measure of the
+network's error) with respect to the weights. This gradient is then used to
+update the weights, typically via an optimization algorithm like \gls{sgd}.
+
+These fundamental aspects of neural networks make them incredibly flexible and
+powerful. They are capable of learning complex patterns and relationships in
+data, and can be applied to a wide range of tasks such as image and speech
+recognition, natural language processing, medical diagnosis, financial
+forecasting, and much more.
+
+There are various types of neural networks, each designed for specific tasks or
+to work with specific types of data. Examples include \glspl{cnn} for image and
+video processing, \glspl{rnn} for sequential data, and \glspl{gan} for
+generating new data that resembles the input data. Each of these networks
+builds on the basic principles outlined above but includes additional
+structures or processes to better handle their specific tasks.
+
+For our task at hand, we will analyze suitable neural network architectures
+that understand temporal dependencies and can predict changes in the body shape
+using our selected human body representation.
+
+After this analysis, we will select the most promising architecture, implement
+it using a neural network framework, train it on our data, and evaluate its
+performance. This will be covered in Chapter \ref{chap:nn}.
 
 \section{Objectives}\label{objectives}
 

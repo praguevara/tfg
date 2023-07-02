@@ -268,8 +268,67 @@ the \gls{smpl} model with the patient's height, weight, and age. Attempts to
 include body fat percentage and muscle mass percentage did not yield improved
 results and were excluded to prevent overfitting.
 
-We utilized the AdamW optimizer with a variable learning rate and weight decay,
-along with \gls{mse} loss as the objective function.
+\subsection{Loss function}
+
+A loss function, also known as a cost function, is a mathematical function that
+quantifies how well a machine learning model performs a specific task. For a
+neural network, the loss function measures the difference between the predicted
+output of the model and the actual target values (the "truth"). The goal during
+the training process is to minimize this loss, thereby making the model's
+predictions as close as possible to the true values.
+
+There are different types of loss functions depending upon the task. For
+regression problems, a common loss function is \gls{mse}, which calculates the
+square of the difference between the predicted and actual values, then averages
+these across all samples. For binary classification problems, Binary
+Cross-Entropy (also known as log loss) is often used, which quantifies the
+difference between the true class and predicted probability. For multi-class
+classification problems, Categorical Cross-Entropy is frequently used.
+
+\subsection{Optimizer}
+
+An optimizer is an integral component of training a neural network. It is the
+mechanism that updates the model's parameters, specifically the weights and
+biases, in response to the feedback provided by the loss function. The goal of
+the optimizer is to minimize the loss function, thereby improving the accuracy
+of the model's predictions. Different optimizers approach this problem in
+unique ways, and the choice of optimizer can significantly impact the speed and
+quality of the model's learning.
+
+\textbf{\gls{sgd}} is a straightforward yet powerful optimization
+algorithm. It estimates the error gradient for the current state of the model
+using a subset of the data (a batch), and then updates the model's parameters
+in the opposite direction of the gradient. This process is repeated, with the
+model incrementally moving towards the region of minimum error in the parameter
+space. Despite its simplicity, \gls{sgd} can be slow and susceptible to getting stuck
+in local minima for complex models and loss function landscapes.
+
+\textbf{\gls{rmsprop}} is an adaptive learning rate method
+designed to address some of the shortcomings of \gls{sgd}. \gls{rmsprop} changes the
+learning rate by dividing it by an exponentially decaying average of squared
+gradients. This method helps to attenuate the updates for frequent and high
+gradients, thus allowing the optimizer to converge faster and reducing the
+likelihood of getting stuck in local minima.
+
+\textbf{\gls{adam}} combines the best properties of \gls{rmsprop} and
+momentum to provide an optimization method that can handle sparse gradients and
+noisy data. It calculates an exponential moving average of the gradient and the
+squared gradient, and the parameters beta1 and beta2 control the decay rates of
+these moving averages. The moving averages themselves are estimates of the
+first moment (the mean) and the second raw moment (the uncentered variance) of
+the gradients. This combination allows \gls{adam} to achieve fast convergence and
+high accuracy.
+
+\textbf{\gls{adamw}} is a modification of the \gls{adam} optimizer that decouples the weight decay
+from the optimization steps. While the original \gls{adam} applies weight decay
+before the optimization step, \gls{adamw} applies it directly to the weights after
+the step, which is a more direct form of weight decay, closer to L2
+regularization. This decoupling can lead to better training results,
+particularly with larger models and small batch sizes, and has since become a
+popular choice in the deep learning community.
+
+We utilized the \gls{adamw} optimizer with a variable learning rate and weight
+decay, along with \gls{mse} loss as the objective function.
 
 \subsection{Hyperparameter tuning}
 
