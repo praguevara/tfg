@@ -249,7 +249,8 @@ The neural network takes the following inputs:
                   of features})$.
     \item A tensor of shape $(\text{batch size}, 1)$ containing the length of the current
           sequence.
-    \item A scalar representing the number of days until the next session.
+    \item A tensor of shape $(\text{batch size}, \text{max sequence length}, 1)$
+          representing the number of days until the next session.
 \end{itemize}
 
 The neural network returns:

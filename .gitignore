@@ -19,3 +19,5 @@
 *.xdv
 *.pdf
 build/
+main.synctex.gz
+.vscode/settings.json
