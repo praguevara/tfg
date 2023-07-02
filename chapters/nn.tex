@@ -1,52 +1,197 @@
-\chapter{Neural network}\label{chap:nn}
+\chapter{Neural Network}\label{chap:nn}
 
-\todo{what are neural networks and why are they useful?}
+Neural networks, a subset of machine learning, have shown exceptional
+capabilities in understanding and predicting patterns within data. Their
+strength lies in their ability to learn from complex and high-dimensional data,
+which makes them invaluable for applications like time series analysis.
 
 \section{Selection of Neural Network Architecture}
 
-In light of the temporal nature of our data, we required a neural network
-architecture capable of handling sequential data. Various neural network
-architectures cater to this requirement. For instance, \gls{rnn} which use
-outputs from previous steps as inputs for subsequent steps, excel at handling
-sequential data. This trait enables \gls{rnn}s to retain information from
-previous steps, a characteristic beneficial for time series analysis.
+Considering the sequential nature of our data, the primary requirement was a
+neural network architecture adept at handling sequential or temporal data. This
+requirement led us to consider several models specially designed for this type
+of data.
 
-However, one downside of RNNs is the vanishing gradients problem, wherein they
-tend to forget information from earlier stages in the sequence. Various
-\gls{rnn} variations, such as \gls{lstm} \cite{lstm:1997} and \gls{gru}
-\cite{gru:2014}, have been designed to mitigate this issue.
+\subsection{Recurrent Neural Networks}
 
-On the other hand, Transformer networks \cite{attention2017}, a more recent
-introduction to the world of neural networks, have seen significant success in
-natural language processing. These networks utilize attention mechanisms,
-allowing them to concentrate on specific portions of an input sequence. While
-useful for time series analysis, the major drawback of Transformer networks is
-their need for vast amounts of training data\todo[]{citation needed} --- a
-requirement we couldn't fulfill in this case.
+\glspl{rnn} are a class of neural networks that excel in handling sequential data,
+owing to their unique ability to model temporal dynamics \cite{doi:10.1073/pnas.79.8.2554}.
+The defining characteristic of \glspl{rnn} is their recurrent hidden state,
+which effectively functions as a form of memory. This state is updated at each
+time step of the sequence, incorporating information from the current input as
+well as the previous hidden state. Thus, \glspl{rnn} can carry forward the
+information throughout the sequence, which is crucial for many tasks, such
+as language modelling or time series prediction.
 
-Upon weighing these factors, we decided to adopt a neural network architecture
-utilizing an \gls{lstm}.
+However, despite their strengths, \glspl{rnn} have a significant drawback known
+as the vanishing gradients problem \cite{gradients:1994}. During the training
+of a neural network using backpropagation, the gradients often become
+exponentially small as they are back-propagated through time, particularly over
+long sequences. This causes the weights of the network to be updated very
+slowly and can lead to the earlier layers of the network learning very slowly
+or not at all. This in effect limits the \gls{rnn}'s ability to model long-term
+dependencies in the data.
 
-\section{Neural network architecture}
+\subsubsection{Long Short-Term Memory Networks}
 
-Utilizing the PyTorch library, we built our custom \gls{lstm}-based neural
-network architecture. \todo{what is pytorch and why did we use it?}
+One of the most popular and effective solutions to the vanishing gradient
+problem is the \gls{lstm}, introduced by Hochreiter and Schmidhuber
+\cite{lstm:1997}. \gls{lstm}s introduce the concept of a cell state, a form of
+long-term memory, and three types of gates (input, forget, and output) that
+control the flow of information into, out of, and within the cell.
 
+The cell state acts as a conveyor belt that runs parallel to the chain-like
+structure of the \gls{rnn}, allowing information to be carried forward with
+minimal transformations. The gates, each of which consists of a sigmoid neural
+net layer and a pointwise multiplication operation, selectively control which
+information is retained or discarded at each time step.
+
+This design enables \gls{lstm}s to learn when to forget previous hidden states
+and when to update hidden states with new information, thus effectively
+combating the vanishing gradients problem and allowing them to capture
+long-term dependencies in the data.
+
+\subsubsection{Gated Recurrent Unit Networks}
+
+Another variant of the \gls{rnn} that addresses the vanishing gradients problem
+is the \gls{gru} \cite{gru:2014}. A \gls{gru} has a similar goal as an
+\gls{lstm}, but with a different approach. It simplifies the architecture by
+using two gates (update and reset) and by merging the hidden state and cell
+state.
+
+The update gate determines how much of the previous state to keep around, while
+the reset gate is used to decide how much of the previous state to forget.
+Despite their simpler architecture, \gls{gru}s have been found to perform on
+par with \gls{lstm}s on a variety of tasks while being computationally more
+efficient.
+
+\subsection{Transformer Networks}
+
+A more recent development in the neural network domain is Transformer networks
+\cite{attention:2017}. These have achieved considerable success, particularly
+in the field of natural language processing. Instead of relying on recurrence,
+Transformer networks leverage an attention mechanism to weight the significance
+of different portions of an input sequence, allowing them to focus on the most
+relevant parts.
+
+The key innovation of Transformer models is their focus on attention
+mechanisms, particularly the so-called "Scaled Dot-Product Attention" and
+"Multi-Head Attention". In contrast to \glspl{rnn} which process sequence data
+iteratively, attention mechanisms allow Transformers to process entire
+sequences of data simultaneously, enabling them to capture long-range
+dependencies in the data more effectively.
+
+These are the key components of these networks networks:
+
+\begin{itemize}
+    \item \textbf{Scaled Dot-Product Attention:} This is the fundamental attention
+          mechanism in Transformer models. Given a query, key, and value, it computes
+          the dot product of the query with all keys, divides each by the square root
+          of the key dimension, and applies a softmax function
+          \footnote{The softmax function converts a vector of scalars into a
+              vector of probabilities that are proportional to the relative scale
+              of each value.} on the values.
+          The output is the weighted sum of the values.
+
+    \item \textbf{Multi-Head Attention:} This is simply a way of using multiple
+          attention mechanisms (or 'heads') in parallel, each with its learned linear
+          transformations of the original queries, keys, and values. The outputs of
+          each head are concatenated and linearly transformed to result in the final output.
+
+    \item \textbf{Positional Encoding:} Since Transformers do not involve any
+          recurrence or convolution operations, they lack any notion of the order of
+          tokens in the sequence. To remedy this, positional encodings are added to
+          the input embeddings, providing the model with explicit information about
+          the relative or absolute position of the tokens in the sequence.
+\end{itemize}
+
+In addition to these components, Transformer networks utilize several fully
+connected layers, layer normalization, and a significant amount of residual
+connections, which help in training deep networks.
+
+Transformers' effectiveness largely stems from their ability to focus on
+different parts of the input sequence, which is particularly important when
+understanding the context in complex sentences or documents. By assigning
+different weights to different parts of the input, they can effectively capture
+the dependencies between words or tokens regardless of their distance from each
+other in the sequence.
+
+Furthermore, Transformers' architecture enables parallel processing of
+sequences, leading to significantly faster training times compared to recurrent
+models like \glspl{rnn} or \glspl{lstm} However, they do tend to require more
+memory and are often computationally intensive due to the attention mechanism's
+complexity, particularly for long sequences.
+
+Despite their success, Transformer networks have some limitations. They may not
+capture the sequential nature of the data as effectively as \glspl{rnn}
+\cite{rnntransformer:2022}. Furthermore, Transformer networks are inherently
+more complex to implement and typically require larger datasets to fully
+leverage their attention mechanism, a requirement we could not meet with our
+current dataset size.
+
+Taking these factors into account, we selected an architecture utilizing an
+\gls{lstm}. This decision was influenced by \gls{lstm}'s ability to handle long
+sequences and maintain essential information, mitigating the vanishing
+gradients problem. Additionally, the implementation complexity and data
+requirements were manageable within the scope of our project, making it a
+balanced choice. We also tested using a \gls{gru}, but it did not perform as
+well.
+
+\section{Implementation of the Neural Network}
+
+The custom LSTM-based neural network architecture we utilized for our study was
+built using PyTorch~\cite{pytorch}. PyTorch is a popular, open-source machine
+learning library, appreciated for its dynamic computational graph and memory
+efficiency, which offers flexibility and speed during model development and
+training.
+
+\subsection{Patients with different number of sessions}
+
+A vital feature of our dataset is the varying lengths of patient sessions,
+which necessitates the need for accommodating sequences of different lengths.
 PyTorch's \texttt{pack\_padded\_sequence} and \texttt{pad\_packed\_sequence}
-functions were used to pack and unpack sequences into
-\href{https://pytorch.org/docs/stable/generated/torch.nn.utils.rnn.PackedSequence.html}{\texttt{PackedSequence}},
-accommodating patients with varying numbers of sessions. An additional tensor
-of \textit{lengths} was used to facilitate the input of the packed sequences
-into the \gls{lstm}, which consequently ignored the values beyond the length of
-the sequence.
+functions are particularly useful in such scenarios. They allow efficient
+packing and unpacking of sequences into a format known as
+\href{https://pytorch.org/docs/stable/generated/torch.nn.utils.rnn.PackedSequence.html}{\texttt{PackedSequence}}.
 
-\todo{explain more?}
+A \texttt{PackedSequence} object is essentially a pair of two data structures:
+\begin{itemize}
+    \item A tensor that contains concatenated sequence data.
+    \item A tensor of integers that represents the length of each sequence.
+\end{itemize}
+
+The purpose of packing a sequence is to allow maximum computational efficiency
+while maintaining the ability to handle variable-length sequences. In essence,
+a \texttt{PackedSequence} tensor stores the data in a packed format, where the
+sequence data are concatenated along the time dimension based on their lengths
+in descending order. This storage format enables fast and efficient \gls{gpu}
+computations and is particularly suited for use with recurrent layers like the
+\gls{lstm}.
+
+The \texttt{pack\_padded\_sequence} function converts padded sequences (where
+shorter sequences are padded with zeros to match the maximum length) into
+\texttt{PackedSequence} format. Conversely, the \texttt{pad\_packed\_sequence}
+function reverses this process, converting a \texttt{PackedSequence} back into
+padded sequences.
+
+An additional tensor of \textit{lengths} was used in our implementation to hold
+the actual length of each sequence in a batch. This tensor informs the LSTM
+layer about the length of the input sequences, which allows it to correctly
+ignore padded values beyond the length of each sequence. This functionality is
+essential for processing batches of sequences with varying lengths while
+avoiding computation on padding tokens.
 
 \begin{figure}
     \centering
     \includegraphics[width=8cm]{files/nn_diagram}
     \caption{Diagram of the implemented \gls{lstm}-based neural network architecture}
+    \label{fig:nn_diagram}
 \end{figure}
+
+This approach accommodates our needs for dealing with variable-length sequences
+and makes the most of PyTorch's efficient processing capabilities. It has been
+central to the successful implementation of our LSTM-based neural network
+architecture.
 
 \subsection{Variability in the dates of the sessions}
 
@@ -59,16 +204,43 @@ This was accomplished by adding a residual connection between the input and the
 output of the neural network, and multiplying the output by the number of days
 until the next session. This way, the neural network can learn to predict the
 daily change, and the output is scaled to the number of days until the next
-session.
-\section{Training and Optimization}
+session. Figure \ref{fig:nn_diagram} shows how this is implemented in a visual
+way.
 
-During the training phase, the neural network receives input in the form of a
-tensor with a shape of $(\text{batch size}, \text{max sequence length},
-    \text{number of features})$, a tensor with a shape of $(\text{batch size}, 1)$
-containing the length of the current sequence, and a scalar representing the
-number of days until the next session. It then generates a tensor of shape
-(\text{batch size}, \text{max sequence length}, \text{number of features}) that
-contains the predicted values for the next session.
+\subsection{Datasets and DataLoader}
+
+PyTorch's Dataset and DataLoader classes are powerful abstractions that
+simplify the task of data loading and preparation. They not only handle
+batching of the data, but also allow for data shuffling and parallel
+processing, which can be critical for leveraging the full potential of the
+hardware at hand and training the model.
+
+For our implementation, we created a custom Dataset and DataLoader class that
+have the following features:
+
+\begin{itemize}
+    \item \textbf{Dataset:} This class extends the abstract Dataset class from PyTorch.
+          It includes an initialization method that performs several preprocessing
+          tasks on the provided data, such as filtering out clients with only one
+          session, removing rows with missing values in the target columns, and
+          mapping client IDs to indices. The overridden \texttt{\_\_getitem\_\_} method
+          introduces a dropout mechanism to drop a fraction of the client's sessions.
+          This may serve as a form of data augmentation. It then returns the processed
+          data, which includes features, days between sessions, and target values.
+          The \texttt{\_\_len\_\_} method returns the number of unique clients in the dataset.
+
+    \item \textbf{DataLoader:} This class extends the DataLoader class from PyTorch.
+          It uses a custom \texttt{collate\_fn} function to process the batches.
+          The collate function takes a list of samples from the dataset and merges
+          them into a single batch. Here, the collate function pads sequences to
+          ensure that every sequence in a batch has the same length. It then calculates
+          the lengths of each sequence and returns these along with the features,
+          days between sessions, and target values. This class provides an iterable
+          over the Dataset that ensures each batch is correctly processed and ready
+          for training the model.
+\end{itemize}
+
+\section{Training and Optimization}
 
 The neural network takes the following inputs:
 
@@ -84,15 +256,17 @@ The neural network returns:
 
 \begin{itemize}
     \item A tensor of shape $(\text{batch size}, \text{max sequence length}, \text{number
-                  of features})$ that contains the predicted values for the next session.
+                  of features})$ that contains the predicted values for the next session for
+          every sessions of every patient in the batch.
 \end{itemize}
 
-To construct the input features, we concatenate the $\beta$ parameters of the
-\gls{smpl} model with the patient's height, weight, and age.
+Having the neural network generate all future sessions at once allows us to
+parallelize the training process, which reduces the training time.
 
-We also experimented with including body fat percentage and muscle mass
-percentage, but the results did not show improvement, so we decided to exclude
-them in order to avoid overfitting.
+The input features are constructed by concatenating the $\beta$ parameters of
+the \gls{smpl} model with the patient's height, weight, and age. Attempts to
+include body fat percentage and muscle mass percentage did not yield improved
+results and were excluded to prevent overfitting.
 
 We utilized the AdamW optimizer with a variable learning rate and weight decay,
 along with \gls{mse} loss as the objective function.
@@ -100,10 +274,7 @@ along with \gls{mse} loss as the objective function.
 \subsection{Hyperparameter tuning}
 
 We performed a grid search to find the optimal hyperparameters for our model.
-The hyperparameters we tuned were the number of layers in the input, \gls{lstm}
-and output, the number of hidden units in the \gls{lstm} and the weight decay.
-
-The final hyperparameters we used are shown in
+The hyperparameters we tuned are shown in
 Table~\ref{tab:final-hyperparameters}.
 
 \begin{table}[h]
@@ -112,6 +283,7 @@ Table~\ref{tab:final-hyperparameters}.
         \toprule
         \textbf{Hyperparameter}                  & \textbf{Value} \\
         \midrule
+        Batch size                               & 32             \\
         Number of layers in the input            & 4              \\
         Number of layers in the \gls{lstm}       & 4              \\
         Number of layers in the output           & 4              \\
