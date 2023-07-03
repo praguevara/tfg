@@ -394,9 +394,6 @@ monitored the validation loss and stopped training if it did not improve for 50
 epochs. We then loaded the model with the lowest validation loss and used it
 for inference.
 
-We used a factor of 0.2 in the training / test split, which resulted in 80\% of
-the data being used for training and 20\% for testing.
-
 \subsection{Hyperparameter tuning}
 
 We performed a grid search to find the optimal hyperparameters for our model.
@@ -421,26 +418,43 @@ Table~\ref{tab:final-hyperparameters}.
     \label{tab:final-hyperparameters}
 \end{table}
 
-\section{Results}
+\subsection{Implementing k-fold Cross-Validation}
 
-\begin{figure}[h]
+The process we adopted for splitting our data into training and testing sets
+involved using a 0.2 factor. This led to 80\% of the data being allocated to
+training and the remaining 20\% to testing. However, this arrangement meant
+that only 15 patients' data was used for testing purposes. Given the small
+sample size, high variance was observed during the training runs. To address
+this, we turned to 5-fold cross-validation, an effective method that allows us
+to utilize all of the data for testing.
+
+In 5-fold cross-validation, the dataset is partitioned into five equal-sized
+subsets or `folds'. The model is then trained five times. Each training
+iteration uses a different fold as the testing set, while the remaining folds
+form the training set. This approach ensures that all data gets utilized in
+both training and testing phases, thereby improving the model's
+generalizability and robustness.
+
+\begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{files/loss}
-    \caption{MSE loss during training}
-    \label{fig:loss}
+    \includegraphics[width=200pt]{files/average_mae.png}
+    \caption{5-fold cross-validation average \gls{mae}}
+    \label{fig:cross-validation}
 \end{figure}
 
-The training of the model was very sensitive to the set seed, which means that
-the results varied significantly between runs. This is because the data is
-split into training and validation sets at random, and there were only 15
-patients assigned to the validation set. We decided not to change the seed
-between runs, as we wanted to be able to compare the results of different
-models.
+\section{Results}
 
 We can see in Figure \ref{fig:loss} that the loss decreases rapidly in the
 first few epochs, and then slowly converges to a minimum. The training loss
 keeps decreasing, while the validation loss slows down but doesn't increase,
 which indicates that the model is not overfitting.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{files/loss}
+    \caption{MSE loss during training}
+    \label{fig:loss}
+\end{figure}
 
 \subsection{Predictions}
 
