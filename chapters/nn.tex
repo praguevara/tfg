@@ -394,6 +394,9 @@ monitored the validation loss and stopped training if it did not improve for 50
 epochs. We then loaded the model with the lowest validation loss and used it
 for inference.
 
+We used a factor of 0.2 in the training / test split, which resulted in 80\% of
+the data being used for training and 20\% for testing.
+
 \subsection{Hyperparameter tuning}
 
 We performed a grid search to find the optimal hyperparameters for our model.
@@ -426,6 +429,13 @@ Table~\ref{tab:final-hyperparameters}.
     \caption{MSE loss during training}
     \label{fig:loss}
 \end{figure}
+
+The training of the model was very sensitive to the set seed, which means that
+the results varied significantly between runs. This is because the data is
+split into training and validation sets at random, and there were only 15
+patients assigned to the validation set. We decided not to change the seed
+between runs, as we wanted to be able to compare the results of different
+models.
 
 We can see in Figure \ref{fig:loss} that the loss decreases rapidly in the
 first few epochs, and then slowly converges to a minimum. The training loss
