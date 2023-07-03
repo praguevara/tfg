@@ -105,22 +105,57 @@ data, flagging conspicuous outliers for removal.
     \end{subfigure}
     \caption{Weight measurements pre and post filtering}
 \end{figure}
+
 \section{SMPL for Body Representation}
 
-In order to represent the body shape we opted to use \gls{smpl}. \gls{smpl}
-encodes the body shape and pose using a low-dimensional linear space. The body
-shape is encoded using 10 shape parameters ($\beta$), and the pose is encoded
-using 72 pose parameters ($\theta$). As our interest lies in body shape, we
-employed only the shape parameters.
+In our study, we found it crucial to accurately represent the human body's
+complex and varied structure. This necessity led us to adopt the \gls{smpl}
+model. \gls{smpl} is a versatile and practical mathematical model for capturing
+a wide range of human body shapes and poses. It provides a parametric approach
+to represent the body shape and pose in a low-dimensional linear space, thus
+making it a valuable asset in our research.
 
-We extracted \gls{smpl} parameters --- shape ($\beta$) and pose ($\theta$) ---
-from the 3D scans using a custom minimization algorithm. This procedure
-consisted of:
+\gls{smpl} characterizes the human body using two sets of parameters: shape ($\beta$)
+and pose ($\theta$). The shape parameters ($\beta$) are derived from a
+principal component analysis of the shapes in a training set. \gls{smpl} uses a
+vector of 10 shape coefficients that define the primary modes of shape
+variation. These coefficients cover a wide array of human body shapes, allowing
+us to capture a comprehensive view of a patient's body structure.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{files/SMPL_formulation}
+\end{figure}
+\todo{cite https://meshcapade.wiki/SMPL}
+
+On the other hand, the pose parameters ($\theta$) represent the orientation of
+the body's joints. This parameter encodes the body's pose into 72 pose
+coefficients. While the pose parameters offer a detailed portrayal of body
+position, our interest primarily lies in the body shape. Therefore, we focus on
+the shape parameters for our study.
+
+\gls{smpl} serves as an ideal fit for our problem due to its compact, continuous, and
+differentiable nature. The model's low-dimensionality reduces computational
+complexity, making it a practical choice for large-scale analysis. Moreover,
+the differentiable nature of the model facilitates gradient-based optimization
+methods, essential for precise parameter estimation. The model's continuous
+representation also allows for a seamless transition between different body
+shapes, further enhancing the realism and accuracy of the body representations.
+
+We extracted \gls{smpl} parameters — shape ($\beta$) and pose ($\theta$) — from
+the 3D scans using a custom minimization algorithm. This method encompassed the
+following stages:
 
 \begin{itemize}
     \item Acquiring and Preprocessing of 3D Data: The Tech4Diet project's system, fitted
           with 13 Intel RealSense RGB-D cameras, was used to capture the 3D data. This
           data was then preprocessed to minimize noise and optimize 3D scan alignment.
+
+          \begin{figure}[H]
+              \centering
+              \includegraphics[width=0.5\textwidth]{files/cameras_scan.png}
+              \caption{Our 3D scanning system}
+          \end{figure}
 
     \item Estimating an Intermediate Template using a BPS Neural Network: The \gls{bps}
           method was used to generate an intermediate 3D model by encoding a set of
@@ -140,10 +175,16 @@ consisted of:
           angles.
 \end{itemize}\todo{cite soco2023 nahuel}
 
-Figure~\ref{fig:beta-vis} demonstrates the effects of shape parameter
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{files/pipeline_smpl.png}
+    \caption{Our pipeline for extracting SMPL parameters from 3D scans}
+\end{figure}
+
+Figure \ref{fig:beta-1-vis} demonstrates the effects of shape parameter
 variations. Although we employed a scale of 3 to amplify their effects for
-visualization, actual values are significantly lower. $\beta_0$ regulates the
-overall body height, while $\beta_1$ is highly correlated with the body mass
+visualization, actual values are significantly lower. $\beta_1$ regulates the
+overall body height, while $\beta_2$ is highly correlated with the body mass
 index.
 
 \begin{table}[h]
@@ -173,35 +214,31 @@ index.
 
 \section{Exploring Additional Datasets}
 
-The pursuit of diverse, informative, and applicable data sources is a
-significant undertaking when aiming to enhance model performance. In our case,
-the quest for additional data proved to be notably challenging due to several
-factors.
+Finding the right data is like searching for a needle in a haystack. It's a key
+task if we want to improve our model, but it's also quite a challenge - and for
+us, it was even more so due to a few reasons.
 
-Firstly, the majority of medical data sets are not readily accessible to the
-public. Their inaccessibility is primarily due to privacy and confidentiality
-concerns, which are paramount in the realm of medical and health data. The
-restrictions on these datasets not only limit their availability but also
-obscure their potential usefulness for our research. Without the opportunity to
-delve into the contents of these datasets, determining their relevance and
-applicability to our work becomes a considerable hurdle.
+First, a lot of medical data isn't exactly out there for anyone to pick up and
+use. Understandably, these datasets are kept private due to concerns around
+confidentiality and privacy, which are of utmost importance when it comes to
+health-related data. This makes these datasets not only hard to come by, but
+also tough to gauge in terms of their usefulness for our work. It's hard to
+tell if a dataset is going to be helpful if we can't even get a peek at what's
+inside.
 
-Secondly, while open-source datasets featuring 3D scans of individuals exist,
-they often lack the dynamic quality crucial to our study. Specifically, these
-datasets tend to offer static, one-time captures of an individual's physique,
-without capturing the temporal changes in body composition. Thus, such datasets
-are ill-suited for our purposes since they lack the capability to portray the
-progression or regression of an individual's body shape over time — a vital
-element for our research into tracking the effects of dietary interventions.
+Second, there are open-source datasets with 3D scans of people. But there's a
+catch: these datasets usually only provide a snapshot of a person's physique at
+one point in time. They don't show how a person's body changes over time, which
+is a key piece of the puzzle in our study on how diet interventions affect body
+shape.
 
-Moreover, we explored datasets not explicitly designed for body composition
-study but still containing potentially relevant data, such as datasets from
-sports science or anthropometry. However, the limitations in scope, data
-granularity, and the lack of consistent body composition measurements made
-these datasets inadequate for our purposes.
+We also looked at datasets from fields like sports science or anthropometry.
+These weren't specifically designed for studying body composition, but we
+thought they might still have some useful data. However, the scope of the data,
+the level of detail, and the lack of consistent body composition measurements
+meant that these datasets didn't quite fit the bill either.
 
-Upon careful consideration of these challenges, we chose to rely solely on our
-proprietary data for model training and evaluation. However, to mitigate the
-limitations of our data, we implemented data augmentation techniques designed
-to enhance and diversify our dataset artificially. We will delve into the
-specifics of these strategies in Chapter \ref{chap:nn}.
+Considering these challenges, we decided to use our own data for training and
+testing our model. To get around the limitations of our data, we used
+techniques to artificially expand and diversify our dataset. We'll talk more
+about how we did this in Chapter \ref{chap:nn}.

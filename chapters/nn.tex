@@ -46,7 +46,7 @@ minimal transformations. The gates, each of which consists of a sigmoid neural
 net layer and a pointwise multiplication operation, selectively control which
 information is retained or discarded at each time step.
 
-This design enables \gls{lstm}s to learn when to forget previous hidden states
+This design enables \glspl{lstm} to learn when to forget previous hidden states
 and when to update hidden states with new information, thus effectively
 combating the vanishing gradients problem and allowing them to capture
 long-term dependencies in the data.
@@ -61,9 +61,16 @@ state.
 
 The update gate determines how much of the previous state to keep around, while
 the reset gate is used to decide how much of the previous state to forget.
-Despite their simpler architecture, \gls{gru}s have been found to perform on
-par with \gls{lstm}s on a variety of tasks while being computationally more
+Despite their simpler architecture, \glspl{gru} have been found to perform on
+par with \glspl{lstm} on a variety of tasks while being computationally more
 efficient.
+
+\begin{figure}[H]
+    \includegraphics[width=0.3\textwidth]{files/RNN_Core2-768x491.png}
+    \includegraphics[width=0.3\textwidth]{files/LSTM-Core-768x466.png}
+    \includegraphics[width=0.3\textwidth]{files/GRU-768x502.png}
+    \caption{Comparison of the core components of \gls{rnn}, \gls{lstm}, and \gls{gru} \cite{http://dprogrammer.org}}
+\end{figure}
 
 \subsection{Transformer Networks}
 
