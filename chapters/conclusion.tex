@@ -15,6 +15,135 @@ approximate the expected changes in body shape before the conclusion of the
 weight loss treatment, which could potentially lead to improved adherence to
 treatment plans.
 
+\section{Objective evaluation}
+
+In this section we will evaluate the extent to which we have achieved the
+objectives set in Chapter \ref{chap:introduction}.
+
+\subsection{Comprehensive Literature Review}
+
+\begin{itemize}
+      \item Understand the current state of the art in human body representation and
+            generation.
+
+      \item Critically analyze the advantages and disadvantages of existing methodologies.
+      \item Identify the most promising approach to guide our project.
+\end{itemize}
+
+We have conducted a thorough review of the literature on human body modelling,
+focusing on parametric models and neural network-based approaches, and as we
+mentioned in Subsection \ref{sec:background}, we wrote and submitted a paper to
+the \gls{iwann} conference. We have identified the most promising approaches
+for our project and discussed their advantages and disadvantages, which in our
+case consisted of the \gls{smpl} model and generative neural networks.
+
+\subsection{Data Preparation}
+
+\begin{itemize}
+      \item Conduct a thorough exploration of the project's data and understand its
+            characteristics.
+      \item Implement rigorous preprocessing steps to ensure the data's quality and
+            consistency.
+      \item Investigate potential data augmentation techniques to enhance the robustness of
+            our models.
+\end{itemize}
+
+We extensively explored and understood the nature of the data collected from
+the project. This dataset, encompassing approximately 400 sessions from 80
+distinct patients, consisted of a rich array of measurements such as 3D scans,
+anthropometric measures, body composition, lifestyle factors, and blood-related
+data. We navigated through the challenges posed by missing data, numerous
+outliers, and irregular intervals of sessions per patient. A thorough
+understanding of these data characteristics led us to devise an effective data
+cleaning pipeline and develop a strategy for handling unevenly distributed
+sessions.
+
+We also established a rigorous preprocessing pipeline using the \gls{pandas}
+library to uphold the data's quality and consistency. We used a multi-index
+system for easy patient-specific data iteration and discrepancy identification.
+Tailored rules were designed to address errors due to decimal separators,
+out-of-range values, and conflicting measurements.
+
+We also paid particular attention to manual outlier detection and removal.
+Measures were taken to verify that measurements were within reasonable
+biological limits, such as checking that the combined muscle and fat
+percentages did not exceed 100\% as well as other hand-crafted rules. Moreover,
+we used the \gls{smpl} for 3D body representation, enabling us to extract
+meaningful shape parameters for further analysis.
+
+While the exploration for additional datasets was met with challenges due to
+privacy concerns, static body representations, and irrelevant data fields, we
+navigated these limitations by focusing on data augmentation techniques. These
+techniques were geared to artificially expand and diversify our existing
+dataset, thereby enhancing the robustness of our model.
+
+\subsection{Neural Network Development}
+
+\begin{itemize}
+      \item Survey potential neural network architectures suitable for time series
+            prediction problems.
+      \item Design a bespoke neural network architecture that is optimized for future human
+            body shape generation.
+      \item Implement and train the proposed neural network, fine-tuning its parameters for
+            optimal performance.
+      \item Evaluate the predictive performance of our trained network.
+\end{itemize}
+
+We began the process of neural network development by conducting a
+comprehensive survey of potential neural network architectures suitable for
+time series prediction problems. This analysis covered a wide range of
+architectures including, but not limited to, \glspl{rnn}, \glspl{lstm},
+\glspl{gru}, and Transformer-based models.
+
+Through our investigation, we gained insights into the strengths and weaknesses
+of each architecture in relation to our specific use case of human body shape
+prediction. For example, \glspl{rnn} can suffer from the vanishing gradient
+problem, making them less effective for long sequences, while \glspl{lstm} and
+\glspl{gru} can handle longer sequences due to their gating mechanisms. On the
+other hand, Transformers, despite their effectiveness on many tasks, can be
+resource-intensive, and their applicability to time series data is still a
+topic of active research.
+
+Following the survey, we designed a bespoke neural network architecture that is
+optimized for future human body shape generation. Our architecture, detailed in
+Chapter \ref{chap:nn}, combines the advantages of residual and LSTM layers,
+enabling it to effectively capture spatial dependencies within and temporal
+dependencies across the shape descriptors.
+
+We also incorporated batch normalization layers to stabilize the learning
+process and dropout layers to mitigate overfitting. The model was designed to
+be flexible and efficient, allowing it to handle a large amount of data and to
+be trained within a reasonable amount of time.
+
+Our proposed neural network was implemented using the PyTorch framework, which
+provided the flexibility and efficiency necessary for our needs. The model was
+trained using the \gls{adamw} optimizer and the \gls{mse} loss function, which
+was deemed suitable for our regression task.
+
+We employed a grid search to fine-tune the hyperparameters of our model.
+Regular checks on the validation set were implemented to monitor the model's
+performance throughout the training process. We also used early stopping to
+prevent overfitting, ceasing the training process if the validation loss did
+not improve over 50 consecutive epochs.
+
+Upon training completion, we evaluated our model's predictive performance. As
+can be seen in the results section, the loss function decreases rapidly in the
+initial epochs, indicating the model's quick adaptation to the task. The
+model's performance remained stable thereafter, with the training loss
+continually decreasing, while the validation loss, though slower, did not
+increase. This suggests that the model was not overfitting, a testament to the
+success of our architecture design and training strategy.
+
+\subsection{Result Evaluation}
+
+\begin{itemize}
+      \item Generate human body shape predictions using our past data.
+      \item Conduct an evaluation of our model's predictive performance, discussing its
+            potential applications and limitations.
+\end{itemize}
+
+\section{Future work}
+
 However, our study was not without limitations. The model's performance was
 constrained by the quantity and quality of data available. Our dataset
 consisted of approximately 200 sessions from 80 patients, which, while
@@ -22,14 +151,19 @@ substantial, might not fully capture the wide range of variability in human
 body shapes and weight loss patterns. Moreover, outliers and missing data,
 which had to be cleaned from our dataset, posed additional challenges.
 
-In future work, several improvements and expansions can be explored:
+Some lines of future work proposed by the author include:
 
 \begin{itemize}
-      \item \textbf{Data collection}: Patients could submit images instead of requiring 3D scans. This approach would allow for increased data collection, while also reducing friction for the patient. We can also consider developing a method to generate 3D models from these images.
+      \item \textbf{Data collection}: Patients could submit images instead of
+            requiring 3D scans. This approach would allow for increased data collection,
+            while also reducing friction for the patient. We can also consider
+            developing a method to generate 3D models from these images.
+
       \item \textbf{Neural network architecture}: While we opted for a \gls{lstm}
             architecture due to the nature of our data, other neural network architectures,
             such as Transformers, could be explored for potential improvements in
             prediction performance.
+
       \item \textbf{Parametric models}: Other parametric models like STAR could
             be considered as alternatives or complements to the \gls{smpl}
             model we used. They might offer different advantages or better fit

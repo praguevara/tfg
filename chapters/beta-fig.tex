@@ -1,127 +1,163 @@
+\def\betaVar{3}
+\def\imgWidth{0.3\textwidth}
+\def\betaWidth{\textwidth}
+
 \begin{figure}[ht!]
-    \def\betaVar{3}
-    \def\imgWidth{0.3\textwidth}
-    \def\betaWidth{0.3\textwidth}
     \centering
-    \begin{subfigure}{\betaWidth}
-        \def\currentBeta{0}
+    \begin{minipage}[b]{\textwidth}
         \centering
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_-\betaVar_m}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_0_-\betaVar_m}
         \includegraphics[width=\imgWidth]{files/visualize_betas/baseline_m}
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_\betaVar_m}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_0_\betaVar_m}
         \linebreak
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_-\betaVar_f}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_0_-\betaVar_f}
         \includegraphics[width=\imgWidth]{files/visualize_betas/baseline_f}
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_\betaVar_f}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_0_\betaVar_f}
         \caption{$\beta_1 = [-\betaVar, 0, +\betaVar]$}
-    \end{subfigure}
-    \begin{subfigure}{\betaWidth}
-        \def\currentBeta{1}
+        \label{fig:beta-1-vis}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[ht!]
+    \centering
+
+    \begin{minipage}[b]{\textwidth}
         \centering
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_-\betaVar_m}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_1_-\betaVar_m}
         \includegraphics[width=\imgWidth]{files/visualize_betas/baseline_m}
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_\betaVar_m}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_1_\betaVar_m}
         \linebreak
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_-\betaVar_f}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_1_-\betaVar_f}
         \includegraphics[width=\imgWidth]{files/visualize_betas/baseline_f}
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_\betaVar_f}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_1_\betaVar_f}
         \caption{$\beta_2 = [-\betaVar, 0, +\betaVar]$}
-    \end{subfigure}
-    \begin{subfigure}{\betaWidth}
-        \def\currentBeta{2}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[ht!]
+    \centering
+
+    \begin{minipage}[b]{\textwidth}
         \centering
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_-\betaVar_m}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_2_-\betaVar_m}
         \includegraphics[width=\imgWidth]{files/visualize_betas/baseline_m}
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_\betaVar_m}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_2_\betaVar_m}
         \linebreak
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_-\betaVar_f}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_2_-\betaVar_f}
         \includegraphics[width=\imgWidth]{files/visualize_betas/baseline_f}
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_\betaVar_f}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_2_\betaVar_f}
         \caption{$\beta_3 = [-\betaVar, 0, +\betaVar]$}
-    \end{subfigure}
-    \begin{subfigure}{\betaWidth}
-        \def\currentBeta{3}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[ht!]
+    \centering
+
+    \begin{minipage}[b]{\textwidth}
         \centering
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_-\betaVar_m}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_3_-\betaVar_m}
         \includegraphics[width=\imgWidth]{files/visualize_betas/baseline_m}
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_\betaVar_m}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_3_\betaVar_m}
         \linebreak
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_-\betaVar_f}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_3_-\betaVar_f}
         \includegraphics[width=\imgWidth]{files/visualize_betas/baseline_f}
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_\betaVar_f}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_3_\betaVar_f}
         \caption{$\beta_4 = [-\betaVar, 0, +\betaVar]$}
-    \end{subfigure}
-    \begin{subfigure}{\betaWidth}
-        \def\currentBeta{4}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[ht!]
+    \centering
+
+    \begin{minipage}[b]{\textwidth}
         \centering
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_-\betaVar_m}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_4_-\betaVar_m}
         \includegraphics[width=\imgWidth]{files/visualize_betas/baseline_m}
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_\betaVar_m}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_4_\betaVar_m}
         \linebreak
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_-\betaVar_f}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_4_-\betaVar_f}
         \includegraphics[width=\imgWidth]{files/visualize_betas/baseline_f}
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_\betaVar_f}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_4_\betaVar_f}
         \caption{$\beta_5 = [-\betaVar, 0, +\betaVar]$}
-    \end{subfigure}
-    \begin{subfigure}{\betaWidth}
-        \def\currentBeta{5}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[ht!]
+    \centering
+
+    \begin{minipage}[b]{\textwidth}
         \centering
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_-\betaVar_m}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_5_-\betaVar_m}
         \includegraphics[width=\imgWidth]{files/visualize_betas/baseline_m}
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_\betaVar_m}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_5_\betaVar_m}
         \linebreak
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_-\betaVar_f}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_5_-\betaVar_f}
         \includegraphics[width=\imgWidth]{files/visualize_betas/baseline_f}
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_\betaVar_f}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_5_\betaVar_f}
         \caption{$\beta_6 = [-\betaVar, 0, +\betaVar]$}
-    \end{subfigure}
-    \begin{subfigure}{\betaWidth}
-        \def\currentBeta{6}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[ht!]
+    \centering
+
+    \begin{minipage}[b]{\textwidth}
         \centering
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_-\betaVar_m}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_6_-\betaVar_m}
         \includegraphics[width=\imgWidth]{files/visualize_betas/baseline_m}
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_\betaVar_m}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_6_\betaVar_m}
         \linebreak
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_-\betaVar_f}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_6_-\betaVar_f}
         \includegraphics[width=\imgWidth]{files/visualize_betas/baseline_f}
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_\betaVar_f}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_6_\betaVar_f}
         \caption{$\beta_7 = [-\betaVar, 0, +\betaVar]$}
-    \end{subfigure}
-    \begin{subfigure}{\betaWidth}
-        \def\currentBeta{7}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[ht!]
+    \centering
+
+    \begin{minipage}[b]{\textwidth}
         \centering
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_-\betaVar_m}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_7_-\betaVar_m}
         \includegraphics[width=\imgWidth]{files/visualize_betas/baseline_m}
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_\betaVar_m}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_7_\betaVar_m}
         \linebreak
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_-\betaVar_f}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_7_-\betaVar_f}
         \includegraphics[width=\imgWidth]{files/visualize_betas/baseline_f}
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_\betaVar_f}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_7_\betaVar_f}
         \caption{$\beta_8 = [-\betaVar, 0, +\betaVar]$}
-    \end{subfigure}
-    \begin{subfigure}{\betaWidth}
-        \def\currentBeta{8}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[ht!]
+    \centering
+
+    \begin{minipage}[b]{\textwidth}
         \centering
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_-\betaVar_m}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_8_-\betaVar_m}
         \includegraphics[width=\imgWidth]{files/visualize_betas/baseline_m}
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_\betaVar_m}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_8_\betaVar_m}
         \linebreak
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_-\betaVar_f}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_8_-\betaVar_f}
         \includegraphics[width=\imgWidth]{files/visualize_betas/baseline_f}
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_\betaVar_f}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_8_\betaVar_f}
         \caption{$\beta_9 = [-\betaVar, 0, +\betaVar]$}
-    \end{subfigure}
-    \begin{subfigure}{\betaWidth}
-        \def\currentBeta{9}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[ht!]
+    \centering
+
+    \begin{minipage}[b]{\textwidth}
         \centering
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_-\betaVar_m}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_9_-\betaVar_m}
         \includegraphics[width=\imgWidth]{files/visualize_betas/baseline_m}
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_\betaVar_m}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_9_\betaVar_m}
         \linebreak
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_-\betaVar_f}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_9_-\betaVar_f}
         \includegraphics[width=\imgWidth]{files/visualize_betas/baseline_f}
-        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_\currentBeta_\betaVar_f}
+        \includegraphics[width=\imgWidth]{files/visualize_betas/beta_9_\betaVar_f}
         \caption{$\beta_{10} = [-\betaVar, 0, +\betaVar]$}
-    \end{subfigure}
-    \caption{Changes in body shape after modifying \gls{smpl} shape parameters.}\label{fig:beta-vis}
+    \end{minipage}
 \end{figure}
