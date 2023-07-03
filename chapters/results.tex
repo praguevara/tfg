@@ -16,17 +16,17 @@ implications.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.3\textwidth]{files/plots/scatter/beta_0.png}
-    \includegraphics[width=0.3\textwidth]{files/plots/scatter/beta_1.png}
-    \includegraphics[width=0.3\textwidth]{files/plots/scatter/beta_2.png}
-    \includegraphics[width=0.3\textwidth]{files/plots/scatter/beta_3.png}
-    \includegraphics[width=0.3\textwidth]{files/plots/scatter/beta_4.png}
-    \includegraphics[width=0.3\textwidth]{files/plots/scatter/beta_5.png}
-    \includegraphics[width=0.3\textwidth]{files/plots/scatter/beta_6.png}
-    \includegraphics[width=0.3\textwidth]{files/plots/scatter/beta_7.png}
-    \includegraphics[width=0.3\textwidth]{files/plots/scatter/beta_8.png}
-    \includegraphics[width=0.3\textwidth]{files/plots/scatter/beta_9.png}
-    \caption{Predictions vs ground truth}
+    \includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_1.png}
+    \includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_2.png}
+    \includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_3.png}
+    \includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_4.png}
+    \includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_5.png}
+    \includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_6.png}
+    \includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_7.png}
+    \includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_8.png}
+    \includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_9.png}
+    \includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_10.png}
+    \caption{Predictions vs ground truth for each $\beta$ parameter.}
     \label{fig:scatter}
 \end{figure}
 
@@ -34,31 +34,17 @@ implications.
 
 The mean \gls{mae} of the model in the test set when predicting the $\beta$
 parameter is \textbf{0.064}. Figure \ref{fig:scatter} shows the predictions of
-the model vs the ground truth, and Table \ref{tab:mae} shows the \gls{mae} for
-each $\beta$. We can see that the model is able to predict the correct value in
-most cases, but it has some problems with outliers.
+the model vs the ground truth, and Figure \ref{fig:fold-mae} shows the
+\gls{mae} for each $\beta$ per fold. We can see that the model is able to
+predict the correct value in most cases, but it has some problems with
+outliers.
 
-\begin{table}[h]
+\begin{figure}[H]
     \centering
-    \caption{\gls{mae} for each $\beta$ parameter}
-    \begin{tabular}{ c c }
-        \toprule
-        \textbf{Feature} & \textbf{MAE} \\
-        \midrule
-        $\beta_1$        & 0.107        \\
-        $\beta_2$        & 0.129        \\
-        $\beta_3$        & 0.076        \\
-        $\beta_4$        & 0.065        \\
-        $\beta_5$        & 0.017        \\
-        $\beta_6$        & 0.027        \\
-        $\beta_7$        & 0.025        \\
-        $\beta_8$        & 0.021        \\
-        $\beta_9$        & 0.041        \\
-        $\beta_{10}$     & 0.025        \\
-        \bottomrule
-        \label{tab:mae}
-    \end{tabular}
-\end{table}
+    \includegraphics[width=300pt]{files/mae_folds.png}
+    \caption{MAE for each $\beta$ per fold.}
+    \label{fig:fold-mae}
+\end{figure}
 
 \subsection{Qualitative results}
 \begin{figure}[h]
@@ -91,8 +77,18 @@ most cases, but it has some problems with outliers.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{files/beta_1_var.png}
-    \caption{Variation of $\beta_1$ in the dataset per patient.}
+    \includegraphics[width=0.3\textwidth]{files/beta_var/beta_1_var.png}
+    \includegraphics[width=0.3\textwidth]{files/beta_var/beta_2_var.png}
+    \includegraphics[width=0.3\textwidth]{files/beta_var/beta_3_var.png}
+    \includegraphics[width=0.3\textwidth]{files/beta_var/beta_3_var.png}
+    \includegraphics[width=0.3\textwidth]{files/beta_var/beta_5_var.png}
+    \includegraphics[width=0.3\textwidth]{files/beta_var/beta_6_var.png}
+    \includegraphics[width=0.3\textwidth]{files/beta_var/beta_7_var.png}
+    \includegraphics[width=0.3\textwidth]{files/beta_var/beta_8_var.png}
+    \includegraphics[width=0.3\textwidth]{files/beta_var/beta_9_var.png}
+    \includegraphics[width=0.3\textwidth]{files/beta_var/beta_10_var.png}
+
+    \caption{Variation of $\beta$ per patient}
     \label{fig:beta-var}
 \end{figure}
 
