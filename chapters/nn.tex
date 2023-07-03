@@ -265,9 +265,10 @@ Having the neural network generate all future sessions at once allows us to
 parallelize the training process, which reduces the training time.
 
 The input features are constructed by concatenating the $\beta$ parameters of
-the \gls{smpl} model with the patient's height, weight, and age. Attempts to
-include body fat percentage and muscle mass percentage did not yield improved
-results and were excluded to prevent overfitting.
+the \gls{smpl} model with the patient's height, weight, age and a one-hot
+vector encoding their gender. Attempts to include body fat percentage and
+muscle mass percentage did not yield improved results and were excluded to
+prevent overfitting.
 
 \subsection{Loss function}
 
