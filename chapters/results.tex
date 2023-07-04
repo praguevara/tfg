@@ -5,7 +5,7 @@
 % Contacto: info@jmrplens.com / Telegram:@jmrplens
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Results}\label{chap:results}
+\chapter{Human Body Prediction Results}\label{chap:results}
 
 In this chapter we will go through the results obtained from the experiments
 performed in the previous chapter. We will start by evaluating the predictive
@@ -46,7 +46,38 @@ outliers.
 	\label{fig:fold-mae}
 \end{figure}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{files/compounded.png}
+	\caption{Compounded predictions for 180 days.}
+	\label{fig:compounded}
+\end{figure}
+
+However, Figure \ref{fig:compounded} shows that the model's predictions begin
+to diverge once we try to feed the predictions back into the model. This makes
+it unsuitable for long-term predictions without some form of regularization.
+
+One possible explanation is that we are trying to predict more into the future
+than the timescale of our scans. We believe that obtaining more scans would
+help the model to learn the long-term dynamics of the patient.
+
 \subsection{Qualitative results}
+
+Although it is hard to evaluate the quality of the generated bodies, we can see
+that the model is able to generate bodies that look like the patient's body.
+Figure {\ref{fig:pred-1}} shows that the predicted bodies after 30 days look
+plausible.
+
+As we saw in the previous chapter, Figure \ref{fig:predicted-betas} shows that
+the value for $\beta_2$, inversely correlated with \gls{bmi}, tends to
+increase, so the predicted bodies tend to be thinner.
+
+In spite of this, the model is unstable if we try to use the predictions as
+input for the next prediction. Figure \ref{fig:compounded} shows that the
+predicted values for the $\beta$ parameter diverge. However, if we take a look
+at the predicted bodies, in Figure {\ref{fig:pred-2}} we can see that the
+predicted bodies still look plausible.
+
 \begin{figure}[h]
 	\centering
 	\begin{subfigure}{\textwidth}
@@ -71,6 +102,20 @@ outliers.
 		\includegraphics[width=60pt]{files/patients/128_predicted}
 	\end{subfigure}
 	\caption{Predicted bodies for two patients.}
+	\label{fig:pred-1}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.3\textwidth]{files/patients/2_predicted_2}
+	\includegraphics[width=0.3\textwidth]{files/patients/2_predicted_3}
+	\includegraphics[width=0.3\textwidth]{files/patients/2_predicted_3}
+	\linebreak
+	\includegraphics[width=0.3\textwidth]{files/patients/2_predicted_5}
+	\includegraphics[width=0.3\textwidth]{files/patients/2_predicted_6}
+	\includegraphics[width=0.3\textwidth]{files/patients/2_predicted_7}
+	\caption[Compounded generations]{Compounded generations for a patient after 30, 60, 90, 120, 150, and 180 days.}
+	\label{fig:pred-2}
 \end{figure}
 
 \section{Discussion}

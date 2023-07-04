@@ -1,5 +1,11 @@
 \chapter{Data Analysis and Preprocessing}\label{chap:data}
 
+As we mentioned in Chapter \ref{chap:introduction}, our work is based on a
+dataset collected for a study on the effects of visualizing the progress of
+weight loss using a \gls{vr} headset during a weight loss treatment .
+
+\section{3D body model dataset under dietetic treatment}
+
 Our dataset comprises approximately 400 sessions obtained from 80 distinct
 patients. These sessions, recorded at irregular intervals, incorporate a 3D
 scan of the patient and a multitude of other measurements such as weight,
@@ -7,7 +13,7 @@ height, body fat percentage, and more.
 
 \begin{table}[h]
 	\centering
-	\begin{tabular}{c c l c}
+	\begin{tabular}{ l l l }
 		\toprule
 		Type                               & Source                                                                                         & Measurement (unit)                        \\
 		\midrule
@@ -43,15 +49,17 @@ height, body fat percentage, and more.
 		\bottomrule
 
 	\end{tabular}
-	\caption{Measurements collected from each session.}
+	\caption{Measurements collected from each session \citep{10045_124160}.}
 \end{table}
 
-\todo[]{${https://rua.ua.es/dspace/bitstream/10045/124160/6/Garcia-dUrso_etal_2022_IEEEAccess.pdf}$}
-The raw data, however, required extensive cleaning before it could be analyzed. We encountered sessions missing certain measurements and numerous data outliers. After our data cleaning process, we were left with approximately 200 viable sessions.
+The raw data, however, required extensive cleaning before it could be analyzed.
+We encountered sessions missing certain measurements and numerous data
+outliers. After our data cleaning process, we were left with approximately 200
+viable sessions.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.5\textwidth]{files/sessions_per_patient}
+	\includegraphics{files/sessions_per_patient}
 	\caption{Variation in the number of sessions per patient.}
 	\label{fig:sessions-per-patient}
 \end{figure}
@@ -61,7 +69,8 @@ per patient varied significantly, with some patients attending only a single
 session and others attending over ten. Given that neural networks necessitate
 uniform input shapes, we were faced with a challenge. We'll elaborate on how we
 tackled this problem in Chapter \ref{chap:nn}.
-\subsection{Data Cleaning and Outlier Detection}
+
+\section{Data Cleaning and Outlier Detection}
 
 A data cleaning pipeline was constructed utilizing the \gls{pandas} library.
 Essential steps encompassed missing data treatment, duplicate removal, and
@@ -125,7 +134,7 @@ us to capture a comprehensive view of a patient's body structure.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{files/SMPL_formulation}
-	\caption{SMPL model \cite{meshcapade}}
+	\caption{SMPL model \citep{meshcapade}}
 	\label{fig:SMPL_formulation}
 \end{figure}
 
@@ -147,18 +156,17 @@ We extracted \gls{smpl} parameters — shape ($\beta$) and pose ($\theta$) — f
 the 3D scans using a custom minimization algorithm. This method encompassed the
 following stages:
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{files/pipeline_smpl.png}
+	\caption{Our pipeline for extracting SMPL parameters from 3D scans.}
+\end{figure}
+
 \begin{itemize}
 	\item Acquiring and Preprocessing of 3D Data: The Tech4Diet project's system, fitted
 	      with 13 Intel RealSense RGB-D cameras, was used to capture the 3D data (Figure
 	      \ref{fig:cameras_scan}). This data was then preprocessed to minimize noise and
 	      optimize 3D scan alignment.
-
-	      \begin{figure}[H]
-		      \centering
-		      \includegraphics[width=\textwidth]{files/cameras_scan.png}
-		      \caption{Our 3D scanning system.}
-		      \label{fig:cameras_scan}
-	      \end{figure}
 
 	\item Estimating an Intermediate Template using a BPS Neural Network: The \gls{bps}
 	      method was used to generate an intermediate 3D model by encoding a set of
@@ -180,8 +188,9 @@ following stages:
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{files/pipeline_smpl.png}
-	\caption{Our pipeline for extracting SMPL parameters from 3D scans.}
+	\includegraphics[width=\textwidth]{files/cameras_scan.png}
+	\caption{Our 3D scanning system.}
+	\label{fig:cameras_scan}
 \end{figure}
 
 Figures \ref{fig:beta-1-vis} to \ref{fig:beta-10-vis} (in the Annex

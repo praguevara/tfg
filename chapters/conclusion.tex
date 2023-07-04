@@ -32,10 +32,10 @@ objectives set in Chapter \ref{chap:introduction}.
 
 We have conducted a thorough review of the literature on human body modelling,
 focusing on parametric models and neural network-based approaches, and as we
-mentioned in Subsection \ref{sec:background}, we wrote and submitted a paper to
-the \gls{iwann} conference. We have identified the most promising approaches
-for our project and discussed their advantages and disadvantages, which in our
-case consisted of the \gls{smpl} model and generative neural networks.
+mentioned in Subsection \ref{sec:sota}, we wrote and submitted a paper to the
+\gls{iwann} conference. We have identified the most promising approaches for
+our project and discussed their advantages and disadvantages, which in our case
+consisted of the \gls{smpl} model and generative neural networks.
 
 \subsection{Data Preparation}
 
@@ -143,11 +143,32 @@ success of our architecture design and training strategy.
             potential applications and limitations.
 \end{itemize}
 
-\todo{Evaluate obtained results}
+Using our trained model, we generated predictions for future human body shapes
+based on past data. Each prediction constituted a series of body shape
+parameters representing the expected body shape of the patient after a certain
+period of weight loss treatment.
+
+Our predictive model exhibited robust performance during the validation phase,
+displaying significant capability to capture and anticipate changes in body
+shape parameters over time. This achievement underscores the viability of our
+model for the proposed task of predicting future body shape changes in the
+context of weight loss treatment.
+
+Nevertheless, the model's predictions, while promising, were not entirely
+flawless. Some inconsistencies and inaccuracies were noticed in a few cases,
+which could be attributed to the inherent complexity of human body shape
+changes and individual variability in weight loss patterns. These limitations
+underline the need for ongoing refinement of our predictive model and its
+potential extensions.
+
+Despite these limitations, our model has substantial potential for real-world
+application. If integrated into weight loss treatment programs, our model could
+provide patients with a visualization of their future body shape changes,
+potentially improving motivation and adherence to treatment plans.
 
 \section{Future work}
 
-However, our study was not without limitations. The model's performance was
+There are many ways we could extend this work. The model's performance was
 constrained by the quantity and quality of data available. Our dataset
 consisted of approximately 200 sessions from 80 patients, which, while
 substantial, might not fully capture the wide range of variability in human
@@ -172,7 +193,7 @@ Some lines of future work proposed by the author include:
             model we used. They might offer different advantages or better fit
             the data depending on the specific conditions and requirements.
 
-      \item \textbf{Rendering output}: An exploration of smplpix for 2D
+      \item \textbf{Rendering output}: An exploration of SMPLpix \citep{prokudin2021smplpix} for 2D
             rendering output might provide an alternative approach for generating
             visualization of predicted body changes.
 \end{itemize}

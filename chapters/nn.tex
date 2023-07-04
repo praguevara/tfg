@@ -1,4 +1,4 @@
-\chapter{Neural Network}\label{chap:nn}
+\chapter{Neural Networks for Time Series Prediction}\label{chap:nn}
 
 Neural networks, a subset of machine learning, have shown exceptional
 capabilities in understanding and predicting patterns within data. Their
@@ -15,7 +15,7 @@ of data.
 \subsection{Recurrent Neural Networks}
 
 \glspl{rnn} are a class of neural networks that excel in handling sequential data,
-owing to their unique ability to model temporal dynamics \cite{doi:10.1073/pnas.79.8.2554}.
+owing to their unique ability to model temporal dynamics \citep{doi:10.1073/pnas.79.8.2554}.
 The defining characteristic of \glspl{rnn} is their recurrent hidden state,
 which effectively functions as a form of memory. This state is updated at each
 time step of the sequence, incorporating information from the current input as
@@ -24,7 +24,7 @@ information throughout the sequence, which is crucial for many tasks, such
 as language modelling or time series prediction.
 
 However, despite their strengths, \glspl{rnn} have a significant drawback known
-as the vanishing gradients problem \cite{gradients:1994}. During the training
+as the vanishing gradients problem \citep{gradients:1994}. During the training
 of a neural network using backpropagation, the gradients often become
 exponentially small as they are back-propagated through time, particularly over
 long sequences. This causes the weights of the network to be updated very
@@ -35,10 +35,10 @@ dependencies in the data.
 \subsubsection{Long Short-Term Memory Networks}
 
 One of the most popular and effective solutions to the vanishing gradient
-problem is the \gls{lstm}, introduced by Hochreiter and Schmidhuber
-\cite{lstm:1997}. \gls{lstm}s introduce the concept of a cell state, a form of
-long-term memory, and three types of gates (input, forget, and output) that
-control the flow of information into, out of, and within the cell.
+problem is the \gls{lstm} \citep{lstm:1997}. \gls{lstm}s introduce the concept
+of a cell state, a form of long-term memory, and three types of gates (input,
+forget, and output) that control the flow of information into, out of, and
+within the cell.
 
 The cell state acts as a conveyor belt that runs parallel to the chain-like
 structure of the \gls{rnn}, allowing information to be carried forward with
@@ -54,7 +54,7 @@ long-term dependencies in the data.
 \subsubsection{Gated Recurrent Unit Networks}
 
 Another variant of the \gls{rnn} that addresses the vanishing gradients problem
-is the \gls{gru} \cite{gru:2014}. A \gls{gru} has a similar goal as an
+is the \gls{gru} \citep{gru:2014}. A \gls{gru} has a similar goal as an
 \gls{lstm}, but with a different approach. It simplifies the architecture by
 using two gates (update and reset) and by merging the hidden state and cell
 state.
@@ -69,13 +69,13 @@ efficient.
 	\includegraphics[width=0.3\textwidth]{files/RNN_Core2-768x491.png}
 	\includegraphics[width=0.3\textwidth]{files/LSTM-Core-768x466.png}
 	\includegraphics[width=0.3\textwidth]{files/GRU-768x502.png}
-	\caption{Comparison of the core components of \gls{rnn}, \gls{lstm}, and \gls{gru} \cite{http://dprogrammer.org}.}
+	\caption{Comparison of the core components of \gls{rnn}, \gls{lstm}, and \gls{gru} \citep{http://dprogrammer.org}.}
 \end{figure}
 
 \subsection{Transformer Networks}
 
 A more recent development in the neural network domain is Transformer networks
-\cite{attention:2017}. These have achieved considerable success, particularly
+\citep{attention:2017}. These have achieved considerable success, particularly
 in the field of natural language processing. Instead of relying on recurrence,
 Transformer networks leverage an attention mechanism to weight the significance
 of different portions of an input sequence, allowing them to focus on the most
@@ -131,7 +131,7 @@ complexity, particularly for long sequences.
 
 Despite their success, Transformer networks have some limitations. They may not
 capture the sequential nature of the data as effectively as \glspl{rnn}
-\cite{rnntransformer:2022}. Furthermore, Transformer networks are inherently
+\citep{rnntransformer:2022}. Furthermore, Transformer networks are inherently
 more complex to implement and typically require larger datasets to fully
 leverage their attention mechanism, a requirement we could not meet with our
 current dataset size.
@@ -147,7 +147,7 @@ well.
 \section{Implementation of the Neural Network}
 
 The custom LSTM-based neural network architecture we utilized for our study was
-built using PyTorch~\cite{pytorch}. PyTorch is a popular, open-source machine
+built using PyTorch~\citep{pytorch}. PyTorch is a popular, open-source machine
 learning library, appreciated for its dynamic computational graph and memory
 efficiency, which offers flexibility and speed during model development and
 training.
@@ -288,7 +288,7 @@ predictions as close as possible to the true values.
 
 There are different types of loss functions depending upon the task. For
 regression problems, a common loss function is \gls{mse} (Equation
-\ref{eq:mse},) which calculates the square of the difference between the
+\ref{eq:mse}), which calculates the square of the difference between the
 predicted and actual values, then averages these across all samples. For binary
 classification problems, Binary Cross-Entropy (also known as log loss)
 (Equation \ref{eq:bce}) is often used, which quantifies the difference between
@@ -445,7 +445,7 @@ five folds. We will explain our results in more detail in Chapter
 	\label{fig:cross-validation}
 \end{figure}
 
-\section{Results}
+\section{Training results}
 
 We can see in Figure \ref{fig:loss} that the loss decreases rapidly in the
 first few epochs, and then slowly converges to a minimum. The training loss

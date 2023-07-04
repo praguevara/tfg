@@ -74,9 +74,9 @@ interprets the outcomes of our model, and chapter \ref{chap:conclusion}
 concludes the document by recapping the work done and suggesting potential
 future research directions.
 
-\section{Background}\label{sec:background}
+\section{State of the Art}\label{sec:sota}
 
-In this section, we provide a comprehensive overview of the state-of-the-art
+In this section, we provide a comprehensive overview of the \gls{sota}
 methodologies for human body representation, as well as a first overview of
 generative neural networks suitable for our purpose. The knowledge derived from
 these studies in human body representation paved the way for a submission to
@@ -96,7 +96,9 @@ representing human body shapes and poses.
 Broadly speaking, human body representations can be categorized based on the
 required input type and the resulting output:
 
-\subsubsection{Input Types}
+\subsubsection{Input-Output Typology}
+
+Taxonomy of models according to their input:
 
 \begin{itemize}
 	\item \textbf{2D input:} Models that utilize 2D images or videos as input.
@@ -104,7 +106,7 @@ required input type and the resulting output:
 	\item \textbf{Parametric models:} Models that require a set of parameters describing the body.
 \end{itemize}
 
-\subsubsection{Output Types}
+We can also categorize models based on their output:
 
 \begin{itemize}
 	\item \textbf{2D space:} These models output human bodies in 2D pixel space, such as images or videos.
@@ -120,25 +122,21 @@ uses a general-purpose generator system guided to generate human models. The
 second deploys a generator specifically designed for creating human models from
 the beginning.
 
-\paragraph{Human-Specific Generators}
-
 Human-specific generators have gained considerable attention in recent years,
 with several notable examples:
 
 \begin{itemize}
-	\item \textbf{SiCloPe} \cite{DBLP:journals/corr/abs-1901-00049} models clothed human bodies using deep generative models.
-	\item \textbf{PIFu} and \textbf{PIFuHD} \cite{pifu, pifuhd} are effective implicit representations aligning 2D image pixels with their corresponding 3D object.
-	\item \textbf{Tex2Shape} \cite{alldieck2019tex2shape} infers detailed full human body shape from a single photograph.
-	\item \textbf{HumanMeshNet} \cite{DBLP:journals/corr/abs-1908-06544} and \textbf{DeepHuman} \cite{DBLP:journals/corr/abs-1903-06473} focus on 3D human body reconstruction from a monocular image.
-	\item \textbf{HumanGen} \cite{jiang2022humangen} provides a detailed 360° realistic free-view rendering of the human body.
-	\item \textbf{HumanNeRF} \cite{weng_humannerf_2022_cvpr} offers a high-fidelity free-view synthesis of dynamic humans.
+	\item \textbf{SiCloPe} \citep{DBLP:journals/corr/abs-1901-00049} models clothed human bodies using deep generative models.
+	\item \textbf{PIFu} and \textbf{PIFuHD} \citep{pifu, pifuhd} are effective implicit representations aligning 2D image pixels with their corresponding 3D object.
+	\item \textbf{Tex2Shape} \citep{alldieck2019tex2shape} infers detailed full human body shape from a single photograph.
+	\item \textbf{HumanMeshNet} \citep{DBLP:journals/corr/abs-1908-06544} and \textbf{DeepHuman} \citep{DBLP:journals/corr/abs-1903-06473} focus on 3D human body reconstruction from a monocular image.
+	\item \textbf{HumanGen} \citep{jiang2022humangen} provides a detailed 360° realistic free-view rendering of the human body.
+	\item \textbf{HumanNeRF} \citep{weng_humannerf_2022_cvpr} offers a high-fidelity free-view synthesis of dynamic humans.
 \end{itemize}
 
-\paragraph{General Purpose Generators}
-
 For general-purpose generators, \textbf{CoCosNet} and its second version
-\cite{CoCosNet, CoCosNet2} have shown significant effectiveness in cross-domain
-image translation.
+\citep{CoCosNet, CoCosNet2} have shown significant effectiveness in
+cross-domain image translation.
 
 \subsubsection{Parametric Models}
 
@@ -148,42 +146,42 @@ on adjustable parameters that allow for pose and shape modifications, enabling
 the reconstruction and creation of unique human bodies. They find applications
 in animation, virtual reality, and garment simulation.
 
-One notable early work in this field is Allen's method \cite{allen:2003}, which
-utilizes a statistical model to create a parametric model of the human body. It
-matches the pose of a human in a 3D scan by interpolating from example scans
-with similar joint angles. However, it does not account for how body shape
-changes with pose, primarily serving as a hole-filling technique.
+One notable early work in this field is Allen's method \citep{allen:2003},
+which utilizes a statistical model to create a parametric model of the human
+body. It matches the pose of a human in a 3D scan by interpolating from example
+scans with similar joint angles. However, it does not account for how body
+shape changes with pose, primarily serving as a hole-filling technique.
 
-Another significant model is SCAPE \cite{scape}, which represents body
+Another significant model is SCAPE \citep{scape}, which represents body
 deformations caused by shape and pose as triangle deformations. It uses linear
 regression to determine pose deformations. Although it aims to represent muscle
 deformations, it lacks specificity for different muscle activities and fails to
 capture motion-related tissue perturbations.
 
-BlendSCAPE \cite{blendscape} extends the SCAPE model by optimizing shape and
+BlendSCAPE \citep{blendscape} extends the SCAPE model by optimizing shape and
 pose registration simultaneously using a blending technique. However, its
 formulation is incompatible with standard graphics packages and may not be
 suitable for common graphics applications.
 
-SymmetricSCAPE \cite{CHEN201952}, a variant of SCAPE and BlendSCAPE,
+SymmetricSCAPE \citep{CHEN201952}, a variant of SCAPE and BlendSCAPE,
 incorporates symmetry constraints to enhance the accuracy and stability of the
 model, resulting in a more robust representation of the 3D human body.
 
-The \gls{smpl} \cite{SMPL:2015} model is widely used for 3D human body shape
+The \gls{smpl} \citep{SMPL:2015} model is widely used for 3D human body shape
 and pose representation. It separates body shape and pose into parameters and
 employs a vertex-based skinning approach with corrective blend shapes, offering
 greater flexibility. It is compatible with various graphics applications.
 
-Improvements to the SMPL model include SMPL-H, which incorporates articulated
-hand pose and shape parameters, and SMPL-X, which includes hand and face pose
-and shape parameters \cite{SMPL-X:2019}
+Improvements to the \gls{smpl} model include SMPL-H, which incorporates
+articulated hand pose and shape parameters, and SMPL-X, which includes hand and
+face pose and shape parameters \citep{SMPL-X:2019}
 
-The STAR model \cite{STAR:2020} addresses limitations of SMPL, such as reducing
-mesh volume around joints, by learning corrective blend shapes. It offers
-realistic deformations of the 3D human body while requiring fewer parameters
-than SMPL.
+The STAR model \citep{STAR:2020} addresses limitations of \gls{smpl}, such as
+reducing mesh volume around joints, by learning corrective blend shapes. It
+offers realistic deformations of the 3D human body while requiring fewer
+parameters than \gls{smpl}.
 
-Another approach is presented in BLSM \cite{doi:10.1007/978-3-030-58558-7_1},
+Another approach is presented in BLSM \citep{doi:10.1007/978-3-030-58558-7_1},
 which utilizes a bone-level skinning method. It establishes the skeleton first
 by determining bone lengths and angles, incorporating identity-specific
 variations, and then applies linear blend skinning for animation.
@@ -215,7 +213,7 @@ regression, or something else.
 \begin{figure}
 	\centering
 	\includegraphics[width=0.3\textwidth]{files/nn.png}
-	\caption{A simple neural network \cite{glosserca}.}
+	\caption{A simple neural network \citep{glosserca}.}
 	\label{fig:nn}
 \end{figure}
 
@@ -242,9 +240,24 @@ generating new data that resembles the input data. Each of these networks
 builds on the basic principles outlined above but includes additional
 structures or processes to better handle their specific tasks.
 
-For our task at hand, we will analyze suitable neural network architectures
-that understand temporal dependencies and can predict changes in the body shape
-using our selected human body representation.
+\subsection{Neural Networks for Sequential Data}
+
+In Chapter \ref{chap:nn}, we will examine different types of networks that are
+specialized for handling sequential or temporal data. We'll start with a look
+at \glspl{rnn} \citep{doi:10.1073/pnas.79.8.2554}, which are known for their
+ability to handle sequences due to their `memory' features.
+
+Next, we'll be discussing \glspl{lstm} and \glspl{gru}
+\citep{lstm:1997,gru:2014}, both of which are variants of \glspl{rnn}. While
+\glspl{lstm} introduce concepts such as a cell state and gates to control
+information flow, \glspl{gru} take a simpler yet equally effective approach.
+
+We will also provide insights on Transformer Networks \citep{attention:2017}, a
+more recent advancement in the field of Neural Networks. These are quite
+different from \glspl{rnn}. Instead of relying on recurrent processing,
+Transformers use an attention mechanism that can process entire sequences of
+data at once, which helps them understand dependencies in data more
+effectively.
 
 After this analysis, we will select the most promising architecture, implement
 it using a neural network framework, train it on our data, and evaluate its
