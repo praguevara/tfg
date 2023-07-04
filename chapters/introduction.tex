@@ -137,8 +137,8 @@ with several notable examples:
 \paragraph{General Purpose Generators}
 
 For general-purpose generators, \textbf{CoCosNet} and its second version
-\cite{Zhang_2020_CVPR, Zhou_2021_CVPR} have shown significant effectiveness in
-cross-domain image translation.
+\cite{CoCosNet, CoCosNet2} have shown significant effectiveness in cross-domain
+image translation.
 
 \subsubsection{Parametric Models}
 
@@ -198,7 +198,8 @@ biological brain, which is how they derive the name `neural networks'.
 At the core of a neural network is the concept of a `neuron' or `node'. These
 neurons are organized into layers: the input layer, one or more hidden layers,
 and the output layer. Each neuron within these layers is interconnected with
-neurons from the subsequent layer.
+neurons from the subsequent layer. Figure \ref{fig:nn} shows a neural network
+with three input neurons, four hidden neurons, and two output neurons.
 
 \textbf{Input layer:} This layer receives raw input signals,
 analogous to sensory data in a biological system.
@@ -210,6 +211,13 @@ the number of hidden layers and neurons in each layer.
 \textbf{Output layer:} The final layer translates the outcomes of the hidden
 layers into the format relevant to the task at hand, be it classification,
 regression, or something else.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.3\textwidth]{files/nn.png}
+	\caption{A simple neural network \cite{glosserca}.}
+	\label{fig:nn}
+\end{figure}
 
 Each connection between the neurons has an associated `weight', which impacts
 the input's influence on the output. During the training process, these weights

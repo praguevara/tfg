@@ -15,19 +15,19 @@ implications.
 \section{Evaluation}
 
 \begin{figure}
-    \centering
-    \includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_1.png}
-    \includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_2.png}
-    \includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_3.png}
-    \includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_4.png}
-    \includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_5.png}
-    \includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_6.png}
-    \includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_7.png}
-    \includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_8.png}
-    \includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_9.png}
-    \includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_10.png}
-    \caption{Predictions vs ground truth for each $\beta$ parameter.}
-    \label{fig:scatter}
+	\centering
+	\includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_1.png}
+	\includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_2.png}
+	\includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_3.png}
+	\includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_4.png}
+	\includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_5.png}
+	\includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_6.png}
+	\includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_7.png}
+	\includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_8.png}
+	\includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_9.png}
+	\includegraphics[width=0.3\textwidth]{files/predictions_beta/beta_10.png}
+	\caption[Predictions vs ground truth]{Predictions (y-axis) vs ground truth (x-axis) for each $\beta$ parameter.}
+	\label{fig:scatter}
 \end{figure}
 
 \subsection{Quantitative results}
@@ -40,56 +40,56 @@ predict the correct value in most cases, but it has some problems with
 outliers.
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=300pt]{files/mae_folds.png}
-    \caption{MAE for each $\beta$ per fold.}
-    \label{fig:fold-mae}
+	\centering
+	\includegraphics[width=300pt]{files/mae_folds.png}
+	\caption{MAE for each $\beta$ per fold.}
+	\label{fig:fold-mae}
 \end{figure}
 
 \subsection{Qualitative results}
 \begin{figure}[h]
-    \centering
-    \begin{subfigure}{\textwidth}
-        \centering
-        \includegraphics[width=60pt]{files/patients/9_2}
-        \includegraphics[width=60pt]{files/patients/9_3}
-        \includegraphics[width=60pt]{files/patients/9_4}
-        \includegraphics[width=60pt]{files/patients/9_5}
-        \includegraphics[width=60pt]{files/patients/9_6}
-        \hspace{10pt}
-        \includegraphics[width=60pt]{files/patients/9_predicted}
-    \end{subfigure}
-    \linebreak
-    \begin{subfigure}{\textwidth}
-        \centering
-        \includegraphics[width=60pt]{files/patients/128_1}
-        \includegraphics[width=60pt]{files/patients/128_2}
-        \includegraphics[width=60pt]{files/patients/128_3}
-        \includegraphics[width=60pt]{files/patients/128_4}
-        \includegraphics[width=60pt]{files/patients/128_5}
-        \hspace{10pt}
-        \includegraphics[width=60pt]{files/patients/128_predicted}
-    \end{subfigure}
-    \caption{Predicted bodies for two patients.}
+	\centering
+	\begin{subfigure}{\textwidth}
+		\centering
+		\includegraphics[width=60pt]{files/patients/9_2}
+		\includegraphics[width=60pt]{files/patients/9_3}
+		\includegraphics[width=60pt]{files/patients/9_4}
+		\includegraphics[width=60pt]{files/patients/9_5}
+		\includegraphics[width=60pt]{files/patients/9_6}
+		\hspace{10pt}
+		\includegraphics[width=60pt]{files/patients/9_predicted}
+	\end{subfigure}
+	\linebreak
+	\begin{subfigure}{\textwidth}
+		\centering
+		\includegraphics[width=60pt]{files/patients/128_1}
+		\includegraphics[width=60pt]{files/patients/128_2}
+		\includegraphics[width=60pt]{files/patients/128_3}
+		\includegraphics[width=60pt]{files/patients/128_4}
+		\includegraphics[width=60pt]{files/patients/128_5}
+		\hspace{10pt}
+		\includegraphics[width=60pt]{files/patients/128_predicted}
+	\end{subfigure}
+	\caption{Predicted bodies for two patients.}
 \end{figure}
 
 \section{Discussion}
 
 \begin{figure}[h]
-    \centering
-    \includegraphics[width=0.3\textwidth]{files/beta_var/beta_1_var.png}
-    \includegraphics[width=0.3\textwidth]{files/beta_var/beta_2_var.png}
-    \includegraphics[width=0.3\textwidth]{files/beta_var/beta_3_var.png}
-    \includegraphics[width=0.3\textwidth]{files/beta_var/beta_3_var.png}
-    \includegraphics[width=0.3\textwidth]{files/beta_var/beta_5_var.png}
-    \includegraphics[width=0.3\textwidth]{files/beta_var/beta_6_var.png}
-    \includegraphics[width=0.3\textwidth]{files/beta_var/beta_7_var.png}
-    \includegraphics[width=0.3\textwidth]{files/beta_var/beta_8_var.png}
-    \includegraphics[width=0.3\textwidth]{files/beta_var/beta_9_var.png}
-    \includegraphics[width=0.3\textwidth]{files/beta_var/beta_10_var.png}
+	\centering
+	\includegraphics[width=0.3\textwidth]{files/beta_var/beta_1_var.png}
+	\includegraphics[width=0.3\textwidth]{files/beta_var/beta_2_var.png}
+	\includegraphics[width=0.3\textwidth]{files/beta_var/beta_3_var.png}
+	\includegraphics[width=0.3\textwidth]{files/beta_var/beta_3_var.png}
+	\includegraphics[width=0.3\textwidth]{files/beta_var/beta_5_var.png}
+	\includegraphics[width=0.3\textwidth]{files/beta_var/beta_6_var.png}
+	\includegraphics[width=0.3\textwidth]{files/beta_var/beta_7_var.png}
+	\includegraphics[width=0.3\textwidth]{files/beta_var/beta_8_var.png}
+	\includegraphics[width=0.3\textwidth]{files/beta_var/beta_9_var.png}
+	\includegraphics[width=0.3\textwidth]{files/beta_var/beta_10_var.png}
 
-    \caption{Variation of $\beta$ per patient}
-    \label{fig:beta-var}
+	\caption{Variation of $\beta$ per patient.}
+	\label{fig:beta-var}
 \end{figure}
 
 One of the main problems of the model is that it has a lot of variance in

@@ -66,10 +66,10 @@ par with \glspl{lstm} on a variety of tasks while being computationally more
 efficient.
 
 \begin{figure}[H]
-    \includegraphics[width=0.3\textwidth]{files/RNN_Core2-768x491.png}
-    \includegraphics[width=0.3\textwidth]{files/LSTM-Core-768x466.png}
-    \includegraphics[width=0.3\textwidth]{files/GRU-768x502.png}
-    \caption{Comparison of the core components of \gls{rnn}, \gls{lstm}, and \gls{gru} \cite{http://dprogrammer.org}}
+	\includegraphics[width=0.3\textwidth]{files/RNN_Core2-768x491.png}
+	\includegraphics[width=0.3\textwidth]{files/LSTM-Core-768x466.png}
+	\includegraphics[width=0.3\textwidth]{files/GRU-768x502.png}
+	\caption{Comparison of the core components of \gls{rnn}, \gls{lstm}, and \gls{gru} \cite{http://dprogrammer.org}.}
 \end{figure}
 
 \subsection{Transformer Networks}
@@ -91,25 +91,25 @@ dependencies in the data more effectively.
 These are the key components of these networks networks:
 
 \begin{itemize}
-    \item \textbf{Scaled Dot-Product Attention:} This is the fundamental attention
-          mechanism in Transformer models. Given a query, key, and value, it computes
-          the dot product of the query with all keys, divides each by the square root
-          of the key dimension, and applies a softmax function
-          \footnote{The softmax function converts a vector of scalars into a
-              vector of probabilities that are proportional to the relative scale
-              of each value.} on the values.
-          The output is the weighted sum of the values.
+	\item \textbf{Scaled Dot-Product Attention:} This is the fundamental attention
+	      mechanism in Transformer models. Given a query, key, and value, it computes
+	      the dot product of the query with all keys, divides each by the square root
+	      of the key dimension, and applies a softmax function
+	      \footnote{The softmax function converts a vector of scalars into a
+		      vector of probabilities that are proportional to the relative scale
+		      of each value.} on the values.
+	      The output is the weighted sum of the values.
 
-    \item \textbf{Multi-Head Attention:} This is simply a way of using multiple
-          attention mechanisms (or `heads') in parallel, each with its learned linear
-          transformations of the original queries, keys, and values. The outputs of
-          each head are concatenated and linearly transformed to result in the final output.
+	\item \textbf{Multi-Head Attention:} This is simply a way of using multiple
+	      attention mechanisms (or `heads') in parallel, each with its learned linear
+	      transformations of the original queries, keys, and values. The outputs of
+	      each head are concatenated and linearly transformed to result in the final output.
 
-    \item \textbf{Positional Encoding:} Since Transformers do not involve any
-          recurrence or convolution operations, they lack any notion of the order of
-          tokens in the sequence. To remedy this, positional encodings are added to
-          the input embeddings, providing the model with explicit information about
-          the relative or absolute position of the tokens in the sequence.
+	\item \textbf{Positional Encoding:} Since Transformers do not involve any
+	      recurrence or convolution operations, they lack any notion of the order of
+	      tokens in the sequence. To remedy this, positional encodings are added to
+	      the input embeddings, providing the model with explicit information about
+	      the relative or absolute position of the tokens in the sequence.
 \end{itemize}
 
 In addition to these components, Transformer networks utilize several fully
@@ -163,8 +163,8 @@ packing and unpacking of sequences into a format known as
 
 A \texttt{PackedSequence} object is essentially a pair of two data structures:
 \begin{itemize}
-    \item A tensor that contains concatenated sequence data.
-    \item A tensor of integers that represents the length of each sequence.
+	\item A tensor that contains concatenated sequence data.
+	\item A tensor of integers that represents the length of each sequence.
 \end{itemize}
 
 The purpose of packing a sequence is to allow maximum computational efficiency
@@ -189,10 +189,10 @@ essential for processing batches of sequences with varying lengths while
 avoiding computation on padding tokens.
 
 \begin{figure}
-    \centering
-    \includegraphics[width=8cm]{files/nn_diagram}
-    \caption{Diagram of the implemented \gls{lstm}-based neural network architecture}
-    \label{fig:nn_diagram}
+	\centering
+	\includegraphics[width=8cm]{files/nn_diagram}
+	\caption{Diagram of the implemented \gls{lstm}-based neural network architecture.}
+	\label{fig:nn_diagram}
 \end{figure}
 
 This approach accommodates our needs for dealing with variable-length sequences
@@ -226,25 +226,25 @@ For our implementation, we created a custom Dataset and DataLoader class that
 have the following features:
 
 \begin{itemize}
-    \item \textbf{Dataset:} This class extends the abstract Dataset class from PyTorch.
-          It includes an initialization method that performs several preprocessing
-          tasks on the provided data, such as filtering out clients with only one
-          session, removing rows with missing values in the target columns, and
-          mapping client IDs to indices. The overridden \texttt{\_\_getitem\_\_} method
-          introduces a dropout mechanism to drop a fraction of the client's sessions.
-          This may serve as a form of data augmentation. It then returns the processed
-          data, which includes features, days between sessions, and target values.
-          The \texttt{\_\_len\_\_} method returns the number of unique clients in the dataset.
+	\item \textbf{Dataset:} This class extends the abstract Dataset class from PyTorch.
+	      It includes an initialization method that performs several preprocessing
+	      tasks on the provided data, such as filtering out clients with only one
+	      session, removing rows with missing values in the target columns, and
+	      mapping client IDs to indices. The overridden \texttt{\_\_getitem\_\_} method
+	      introduces a dropout mechanism to drop a fraction of the client's sessions.
+	      This may serve as a form of data augmentation. It then returns the processed
+	      data, which includes features, days between sessions, and target values.
+	      The \texttt{\_\_len\_\_} method returns the number of unique clients in the dataset.
 
-    \item \textbf{DataLoader:} This class extends the DataLoader class from PyTorch.
-          It uses a custom \texttt{collate\_fn} function to process the batches.
-          The collate function takes a list of samples from the dataset and merges
-          them into a single batch. Here, the collate function pads sequences to
-          ensure that every sequence in a batch has the same length. It then calculates
-          the lengths of each sequence and returns these along with the features,
-          days between sessions, and target values. This class provides an iterable
-          over the Dataset that ensures each batch is correctly processed and ready
-          for training the model.
+	\item \textbf{DataLoader:} This class extends the DataLoader class from PyTorch.
+	      It uses a custom \texttt{collate\_fn} function to process the batches.
+	      The collate function takes a list of samples from the dataset and merges
+	      them into a single batch. Here, the collate function pads sequences to
+	      ensure that every sequence in a batch has the same length. It then calculates
+	      the lengths of each sequence and returns these along with the features,
+	      days between sessions, and target values. This class provides an iterable
+	      over the Dataset that ensures each batch is correctly processed and ready
+	      for training the model.
 \end{itemize}
 
 \section{Training and Optimization}
@@ -252,20 +252,20 @@ have the following features:
 The neural network takes the following inputs:
 
 \begin{itemize}
-    \item A tensor of shape $(\text{batch size}, \text{max sequence length}, \text{number
-                  of features})$.
-    \item A tensor of shape $(\text{batch size}, 1)$ containing the length of the current
-          sequence.
-    \item A tensor of shape $(\text{batch size}, \text{max sequence length}, 1)$
-          representing the number of days until the next session.
+	\item A tensor of shape $(\text{batch size}, \text{max sequence length}, \text{number
+			      of features})$.
+	\item A tensor of shape $(\text{batch size}, 1)$ containing the length of the current
+	      sequence.
+	\item A tensor of shape $(\text{batch size}, \text{max sequence length}, 1)$
+	      representing the number of days until the next session.
 \end{itemize}
 
 The neural network returns:
 
 \begin{itemize}
-    \item A tensor of shape $(\text{batch size}, \text{max sequence length}, \text{number
-                  of features})$ that contains the predicted values for the next session for
-          every session of every patient in the batch.
+	\item A tensor of shape $(\text{batch size}, \text{max sequence length}, \text{number
+			      of features})$ that contains the predicted values for the next session for
+	      every session of every patient in the batch.
 \end{itemize}
 
 Having the neural network generate all future sessions at once allows us to
@@ -287,27 +287,26 @@ the training process is to minimize this loss, thereby making the model's
 predictions as close as possible to the true values.
 
 There are different types of loss functions depending upon the task. For
-regression problems, a common loss function is \gls{mse}, which calculates the
-square of the difference between the predicted and actual values, then averages
-these across all samples. For binary classification problems, Binary
-Cross-Entropy (also known as log loss) is often used, which quantifies the
-difference between the true class and predicted probability. For multi-class
-classification problems, Categorical Cross-Entropy is frequently used.
+regression problems, a common loss function is \gls{mse} (Equation
+\ref{eq:mse},) which calculates the square of the difference between the
+predicted and actual values, then averages these across all samples. For binary
+classification problems, Binary Cross-Entropy (also known as log loss)
+(Equation \ref{eq:bce}) is often used, which quantifies the difference between
+the true class and predicted probability. For multi-class classification
+problems, Categorical Cross-Entropy (Equation \ref{eq:cce}) is frequently used.
 
-\begin{figure}[H]
-    \begin{subfigure}{\textwidth}
-        \[ \text{MSE}(y, \hat{y}) = \frac{1}{n} \sum_{i=1}^{n}(y_i - \hat{y}_i)^2 \]
-    \end{subfigure}
-
-    \begin{subfigure}{\textwidth}
-        \[ \text{BCE}(y, \hat{y}) = -\frac{1}{n} \sum_{i=1}^{n} [y_i \log(\hat{y}_i) + (1 - y_i) \log(1 - \hat{y}_i)] \]
-    \end{subfigure}
-
-    \begin{subfigure}{\textwidth}
-        \[ \text{CCE}(y, \hat{y}) = -\frac{1}{n} \sum_{i=1}^{n} \sum_{j=1}^{m} y_{ij} \log(\hat{y}_{ij}) \]
-    \end{subfigure}
-    \caption{Common loss functions}
-\end{figure}
+\begin{equation}
+	\text{MSE}(y, \hat{y}) = \frac{1}{n} \sum_{i=1}^{n}(y_i - \hat{y}_i)^2
+	\label{eq:mse}
+\end{equation}
+\begin{equation}
+	\text{BCE}(y, \hat{y}) = -\frac{1}{n} \sum_{i=1}^{n} [y_i \log(\hat{y}_i) + (1 - y_i) \log(1 - \hat{y}_i)]
+	\label{eq:bce}
+\end{equation}
+\begin{equation}
+	\text{CCE}(y, \hat{y}) = -\frac{1}{n} \sum_{i=1}^{n} \sum_{j=1}^{m} y_{ij} \log(\hat{y}_{ij})
+	\label{eq:cce}
+\end{equation}
 
 \subsection{Optimizer}
 
@@ -319,72 +318,72 @@ of the model's predictions. Different optimizers approach this problem in
 unique ways, and the choice of optimizer can significantly impact the speed and
 quality of the model's learning.
 
-\textbf{\gls{sgd}} is a straightforward yet powerful optimization
-algorithm. It estimates the error gradient for the current state of the model
-using a subset of the data (a batch), and then updates the model's parameters
-in the opposite direction of the gradient. This process is repeated, with the
-model incrementally moving towards the region of minimum error in the parameter
-space. Despite its simplicity, \gls{sgd} can be slow and susceptible to getting stuck
+\textbf{\gls{sgd}} (Equation \ref{eq:sgd}) is a straightforward yet powerful optimization algorithm.
+It estimates the error gradient for the current state of the model using a subset
+of the data (a batch), and then updates the model's parameters in the opposite
+direction of the gradient. This process is repeated, with the model incrementally
+moving towards the region of minimum error in the parameter space.
+Despite its simplicity, \gls{sgd} can be slow and susceptible to getting stuck
 in local minima for complex models and loss function landscapes.
 
-\begin{figure}[H]
-    \[ w := w - \eta\nabla Q_i(w) \]
-    \caption{\gls{sgd} update rule}
-\end{figure}
+\begin{equation}
+	w := w - \eta\nabla Q_i(w)
+	\label{eq:sgd}
+\end{equation}
 
-\textbf{\gls{rmsprop}} is an adaptive learning rate method
-designed to address some of the shortcomings of \gls{sgd}. \gls{rmsprop} changes the
-learning rate by dividing it by an exponentially decaying average of squared
-gradients. This method helps to attenuate the updates for frequent and high
-gradients, thus allowing the optimizer to converge faster and reducing the
-likelihood of getting stuck in local minima.
+\textbf{\gls{rmsprop}} (Equation \ref{eq:rmsprop}) is an adaptive learning rate method designed to address
+some of the shortcomings of \gls{sgd}. \gls{rmsprop} changes the learning rate
+by dividing it by an exponentially decaying average of squared gradients. This
+method helps to attenuate the updates for frequent and high gradients, thus
+allowing the optimizer to converge faster and reducing the likelihood of getting
+stuck in local minima.
 
-\begin{figure}[H]
-    \begin{align*}
-        g & := \beta g + (1 - \beta) (\nabla Q_i(w))^2,            \\
-        w & := w - \frac{\eta}{\sqrt{g + \epsilon}} \nabla Q_i(w).
-    \end{align*}
-    \caption{\gls{rmsprop} update rule}
-\end{figure}
+\begin{equation}
+	\begin{aligned}
+		g & := \beta g + (1 - \beta) (\nabla Q_i(w))^2,            \\
+		w & := w - \frac{\eta}{\sqrt{g + \epsilon}} \nabla Q_i(w).
+	\end{aligned}
+	\label{eq:rmsprop}
+\end{equation}
 
-\textbf{\gls{adam}} combines the best properties of \gls{rmsprop} and
-momentum to provide an optimization method that can handle sparse gradients and
-noisy data. It calculates an exponential moving average of the gradient and the
-squared gradient, and the parameters beta1 and beta2 control the decay rates of
-these moving averages. The moving averages themselves are estimates of the
+\textbf{\gls{adam}} (Equation \ref{eq:adam}) combines the best properties of \gls{rmsprop} and momentum
+to provide an optimization method that can handle sparse gradients and noisy
+data. It calculates an exponential moving average of the gradient and the
+squared gradient, and the parameters beta1 and beta2 control the decay rates
+of these moving averages. The moving averages themselves are estimates of the
 first moment (the mean) and the second raw moment (the uncentered variance) of
-the gradients. This combination allows \gls{adam} to achieve fast convergence and
-high accuracy.
+the gradients. This combination allows \gls{adam} to achieve fast convergence
+and high accuracy.
 
-\begin{figure}[H]
-    \begin{align*}
-        m       & := \beta_1 m + (1 - \beta_1) \nabla Q_i(w),            \\
-        v       & := \beta_2 v + (1 - \beta_2) (\nabla Q_i(w))^2,        \\
-        \hat{m} & := \frac{m}{1 - \beta_1^t},                            \\
-        \hat{v} & := \frac{v}{1 - \beta_2^t},                            \\
-        w       & := w - \frac{\eta \hat{m}}{\sqrt{\hat{v}} + \epsilon}.
-    \end{align*}
-    \caption{\gls{adam} update rule}
-\end{figure}
+\begin{equation}
+	\begin{aligned}
+		m       & := \beta_1 m + (1 - \beta_1) \nabla Q_i(w),            \\
+		v       & := \beta_2 v + (1 - \beta_2) (\nabla Q_i(w))^2,        \\
+		\hat{m} & := \frac{m}{1 - \beta_1^t},                            \\
+		\hat{v} & := \frac{v}{1 - \beta_2^t},                            \\
+		w       & := w - \frac{\eta \hat{m}}{\sqrt{\hat{v}} + \epsilon}.
+	\end{aligned}
+	\label{eq:adam}
+\end{equation}
 
-\textbf{\gls{adamw}} is a modification of the \gls{adam} optimizer that decouples the weight decay
-from the optimization steps. While the original \gls{adam} applies weight decay
-before the optimization step, \gls{adamw} applies it directly to the weights after
-the step, which is a more direct form of weight decay, closer to L2
-regularization. This decoupling can lead to better training results,
-particularly with larger models and small batch sizes, and has since become a
-popular choice in the deep learning community.
+\textbf{\gls{adamw}} (Equation \ref{eq:adamw}) is a modification of the \gls{adam} optimizer that decouples
+the weight decay from the optimization steps. While the original \gls{adam} applies
+weight decay before the optimization step, \gls{adamw} applies it directly to the
+weights after the step, which is a more direct form of weight decay, closer to
+L2 regularization. This decoupling can lead to better training results,
+particularly with larger models and small batch sizes, and has since become
+a popular choice in the deep learning community.
 
-\begin{figure}[H]
-    \begin{align*}
-        m       & := \beta_1 m + (1 - \beta_1) \nabla Q_i(w),                               \\
-        v       & := \beta_2 v + (1 - \beta_2) (\nabla Q_i(w))^2,                           \\
-        \hat{m} & := \frac{m}{1 - \beta_1^t},                                               \\
-        \hat{v} & := \frac{v}{1 - \beta_2^t},                                               \\
-        w       & := (1 - \lambda \eta) w - \frac{\eta \hat{m}}{\sqrt{\hat{v}} + \epsilon}.
-    \end{align*}
-    \caption{\gls{adamw} update rule}
-\end{figure}
+\begin{equation}
+	\begin{aligned}
+		m       & := \beta_1 m + (1 - \beta_1) \nabla Q_i(w),                               \\
+		v       & := \beta_2 v + (1 - \beta_2) (\nabla Q_i(w))^2,                           \\
+		\hat{m} & := \frac{m}{1 - \beta_1^t},                                               \\
+		\hat{v} & := \frac{v}{1 - \beta_2^t},                                               \\
+		w       & := (1 - \lambda \eta) w - \frac{\eta \hat{m}}{\sqrt{\hat{v}} + \epsilon}.
+	\end{aligned}
+	\label{eq:adamw}
+\end{equation}
 
 We utilized the \gls{adamw} optimizer with a variable learning rate and weight
 decay, along with \gls{mse} loss as the objective function.
@@ -401,21 +400,21 @@ The hyperparameters we tuned are shown in
 Table~\ref{tab:final-hyperparameters}.
 
 \begin{table}[h]
-    \centering
-    \begin{tabular}{l c c}
-        \toprule
-        \textbf{Hyperparameter}                  & \textbf{Value} \\
-        \midrule
-        Batch size                               & 32             \\
-        Number of layers in the input            & 4              \\
-        Number of layers in the \gls{lstm}       & 4              \\
-        Number of layers in the output           & 4              \\
-        Number of hidden units in the \gls{lstm} & 32             \\
-        Weight decay                             & 0.001          \\
-        \bottomrule
-    \end{tabular}
-    \caption{Final hyperparameters used for the neural network}
-    \label{tab:final-hyperparameters}
+	\centering
+	\begin{tabular}{l c c}
+		\toprule
+		\textbf{Hyperparameter}                  & \textbf{Value} \\
+		\midrule
+		Batch size                               & 32             \\
+		Number of layers in the input            & 4              \\
+		Number of layers in the \gls{lstm}       & 4              \\
+		Number of layers in the output           & 4              \\
+		Number of hidden units in the \gls{lstm} & 32             \\
+		Weight decay                             & 0.001          \\
+		\bottomrule
+	\end{tabular}
+	\caption{Final hyperparameters used for the neural network}
+	\label{tab:final-hyperparameters}
 \end{table}
 
 \subsection{Implementing k-fold Cross-Validation}
@@ -435,14 +434,15 @@ form the training set. This approach ensures that all data gets utilized in
 both training and testing phases, thereby improving the model's
 generalizability and robustness.
 
-We will show the results of our 5-fold cross-validation in Chapter
+Figure \ref{fig:cross-validation} shows the average \gls{mae} for each of the
+five folds. We will explain our results in more detail in Chapter
 \ref{chap:results}.
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=300pt]{files/average_mae.png}
-    \caption{5-fold cross-validation average \gls{mae}}
-    \label{fig:cross-validation}
+	\centering
+	\includegraphics[width=300pt]{files/average_mae.png}
+	\caption{5-fold cross-validation average \gls{mae}.}
+	\label{fig:cross-validation}
 \end{figure}
 
 \section{Results}
@@ -453,10 +453,10 @@ keeps decreasing, while the validation loss slows down but doesn't increase,
 which indicates that the model is not overfitting.
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{files/loss}
-    \caption{MSE loss during training}
-    \label{fig:loss}
+	\centering
+	\includegraphics[width=\textwidth]{files/loss}
+	\caption{MSE loss during training.}
+	\label{fig:loss}
 \end{figure}
 
 \subsection{Predictions}
@@ -464,14 +464,17 @@ which indicates that the model is not overfitting.
 While a more detailed analysis of the results will be presented in the next
 chapter, we provide some examples of our model's predictions.
 
-Figure \ref{fig:predicted-betas} displays the shape parameters for a patient
-alongside the model's prediction.
+Figure \ref{fig:predicted-betas} displays the shape parameters for some
+patients alongside the model's prediction.
 
 \begin{figure}[h]
-    \centering
-    \includegraphics[width=\textwidth]{files/predicted_betas}
-    \caption{Shape parameters for a patient and the model's prediction.}
-    \label{fig:predicted-betas}
+	\centering
+	\includegraphics[width=210pt]{files/betas_patient_2.png}
+	\includegraphics[width=210pt]{files/betas_patient_3.png}
+	\includegraphics[width=210pt]{files/betas_patient_8.png}
+	\includegraphics[width=210pt]{files/betas_patient_9.png}
+	\caption{Evolution and prediction of the shape parameters for four patients.}
+	\label{fig:predicted-betas}
 \end{figure}
 
 Figure \ref{fig:patient-body-model} illustrates the reconstructed 3D model of a
@@ -480,17 +483,17 @@ the sequence represents the model's prediction after one month from the last
 session, with a total of 74 days between the first and last session.
 
 \begin{figure}[h]
-    \centering
-    \includegraphics[width=120pt]{files/patients/2_6}
-    \includegraphics[width=120pt]{files/patients/2_7}
-    \includegraphics[width=120pt]{files/patients/2_8}
-    \includegraphics[width=120pt]{files/patients/2_9}
-    \includegraphics[width=120pt]{files/patients/2_10}
-    \includegraphics[width=120pt]{files/patients/2_11}
-    \linebreak
-    \includegraphics[width=120pt]{files/patients/2_predicted}
-    \caption[Reconstructed 3D model of the patient's body]{Reconstructed 3D model of the patient's body. The last image is the model's prediction after one month from the last session. There are a total of 74 days between the first and last session.}
-    \label{fig:patient-body-model}
+	\centering
+	\includegraphics[width=120pt]{files/patients/2_6}
+	\includegraphics[width=120pt]{files/patients/2_7}
+	\includegraphics[width=120pt]{files/patients/2_8}
+	\includegraphics[width=120pt]{files/patients/2_9}
+	\includegraphics[width=120pt]{files/patients/2_10}
+	\includegraphics[width=120pt]{files/patients/2_11}
+	\linebreak
+	\includegraphics[width=120pt]{files/patients/2_predicted}
+	\caption[Reconstructed 3D model of the patient's body.]{Reconstructed 3D model of a patient's body. The last image is the model's prediction after one month from the last session. There are a total of 74 days between the first and last session.}
+	\label{fig:patient-body-model}
 \end{figure}
 
 The results obtained provide an initial understanding of the model's
