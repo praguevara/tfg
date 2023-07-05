@@ -421,11 +421,11 @@ Table~\ref{tab:final-hyperparameters}.
 
 The process we adopted for splitting our data into training and testing sets
 involved using a 0.2 factor. This led to 80\% of the data being allocated to
-training and the remaining 20\% to testing. However, this arrangement meant
-that only 15 patients' data was used for testing purposes. Given the small
-sample size, high variance was observed during the training runs. To address
-this, we turned to 5-fold cross-validation, an effective method that allows us
-to utilize all of the data for testing.
+training and the remaining 20\% to testing. However, this arrangement resulted
+in using data from only 15 patients for testing. Given the small sample size,
+high variance was observed during the training runs. To address this, we turned
+to 5-fold cross-validation, an effective method that allows us to utilize all
+of the data for testing.
 
 In 5-fold cross-validation, the dataset is partitioned into five equal-sized
 subsets or `folds'. The model is then trained five times. Each training

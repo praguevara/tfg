@@ -2,7 +2,7 @@
 
 As we mentioned in Chapter \ref{chap:introduction}, our work is based on a
 dataset collected for a study on the effects of visualizing the progress of
-weight loss using a \gls{vr} headset during a weight loss treatment .
+weight loss using a \gls{vr} headset during a weight loss treatment.
 
 \section{3D body model dataset under dietetic treatment}
 
@@ -73,8 +73,8 @@ tackled this problem in Chapter \ref{chap:nn}.
 \section{Data Cleaning and Outlier Detection}
 
 A data cleaning pipeline was constructed utilizing the \gls{pandas} library.
-Essential steps encompassed missing data treatment, duplicate removal, and
-variable unit standardization.
+The essential steps involved in the data cleaning process included missing data
+treatment, invalid data removal, and variable unit standardization.
 
 We indexed our dataset with a multi-index that included the patient's id and
 the session number. This system facilitated patient-specific data iteration and
@@ -251,6 +251,6 @@ the level of detail, and the lack of consistent body composition measurements
 meant that these datasets didn't quite fit the bill either.
 
 Considering these challenges, we decided to use our own data for training and
-testing our model. To get around the limitations of our data, we used
-techniques to artificially expand and diversify our dataset. We'll talk more
-about how we did this in Chapter \ref{chap:nn}.
+testing our model. To get around the limitations of our data, we looked into
+techniques to artificially expand our dataset. We'll talk more about how we did
+this in Chapter \ref{chap:nn}.
